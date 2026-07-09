@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検3級 文法 13章 比較 Part 2</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary-blue: #1e88e5;
+    --accent-orange: #ff9800;
+    --text-dark: #2c3e50;
+    --bg-color: #f0f7ff;
+    --border-color: #bbdefb;
+    --success-green: #43a047;
+  }
+
+  body {
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "HGMaruGothicMPRO", sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+  }
+
+  .container {
+    background: white;
+    max-width: 850px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.08);
+    margin-top: 20px;
+  }
+
+  h2 {
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .progress-container {
+    width: 100%;
+    background-color: #eee;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    height: 8px;
+  }
+  .progress-bar {
+    height: 100%;
+    background-color: var(--accent-orange);
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  .progress-text {
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .image-box {
+    text-align: center;
+    margin-bottom: 25px;
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px dashed #ccc;
+  }
+
+  .image-box img {
+    max-width: 100%;
+    height: auto;
+    max-height: 250px;
+    border-radius: 8px;
+  }
+
+  .question-instruction {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+  }
+
+  .sentence-box {
+    font-size: 1.3rem;
+    line-height: 2.2;
+    background-color: #f7faff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    border-left: 5px solid var(--primary-blue);
+    margin-bottom: 25px;
+    white-space: nowrap;
+  }
+
+  .break-line {
+    display: none;
+  }
+
+  select {
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 6px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-dark);
+    background-color: white;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: all 0.2s;
+    vertical-align: middle;
+  }
+
+  select:hover {
+    border-color: var(--primary-blue);
+  }
+
+  select:focus {
+    outline: none;
+    border-color: var(--accent-orange);
+  }
+
+  select.correct-select {
+    background-color: #e8f5e9;
+    border-color: var(--success-green);
+    color: #2e7d32;
+    pointer-events: none;
+  }
+
+  .feedback-message {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 35px;
+    margin-bottom: 15px;
+  }
+
+  .action-btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    background-color: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 0 #2e7d32;
+    display: block;
+    margin: 10px auto;
+    transition: transform 0.1s;
+  }
+
+  .action-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+
+  .celebration-text {
+    font-size: 1.8rem;
+    color: #2e7d32;
+    font-weight: bold;
+    text-align: center;
+    padding: 40px 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 840px) {
+    .sentence-box {
+      white-space: normal;
+      font-size: 1.2rem;
+      line-height: 2.4;
+      padding: 15px;
+    }
+    .break-line {
+      display: block;
+      content: "";
+      margin-top: 5px;
+    }
+    select {
+      font-size: 1rem;
+      padding: 4px 8px;
+      margin: 4px 2px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h2>英検3級 文法 13章 比較 Part 2</h2>
+
+<div class="container">
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-text" id="progressText">0 / 0問目</div>
+  
+  <div id="game-content">
+    <div class="image-box">
+      <img id="qImage" src="" alt="比較用イラスト">
+    </div>
+    <div class="question-instruction" id="qInstruction"></div>
+    <div class="sentence-box" id="qSentence"></div>
+    
+    <div class="feedback-message" id="feedbackField"></div>
+    
+    <button class="action-btn" id="actionBtn" onclick="handleAction()">答えをチェック</button>
+  </div>
+</div>
+
+<script>
+  const quizData = [
+    {
+      img: "images-bigger/big.png",
+      instruction: "【問題1】四角形の大きさを比べて、正しい言葉を選ぼう。",
+      template: "A is [blank1] than C, [break]but not as [blank2] as B.",
+      options1: ["bigger", "smaller", "taller", "longer"],
+      options2: ["big", "small", "biggest", "tall"],
+      ans1: "bigger",
+      ans2: "big"
+    },
+    {
+      img: "images-bigger/long.png",
+      instruction: "【問題2】棒の長さを比べて、正しい言葉を選ぼう。",
+      template: "A is [blank1] than B, [break]but not [blank2] C.",
+      options1: ["longer", "shorter", "bigger", "more long"],
+      options2: ["as long as", "longer than", "as short as", "so longer"],
+      ans1: "longer",
+      ans2: "as long as"
+    },
+    {
+      img: "images-bigger/heavy.png",
+      instruction: "【問題3】おもりの重さを比べて、正しい言葉を選ぼう。",
+      // 主語をBに、後半を「not as 原級 as」の形にバッチリ修正したよ！
+      template: "B is [blank1] than A, [break]but not as [blank2] as C.",
+      options1: ["heavier", "lighter", "heaviest", "more heavy"],
+      options2: ["heavy", "light", "heavier", "heaviest"],
+      ans1: "heavier",
+      ans2: "heavy"
+    },
+    {
+      img: "images-bigger/old.png",
+      instruction: "【問題4】みんなの年齢を比べて、正しい言葉を選ぼう。",
+      template: "B is [blank1] than C, [break]but [blank2] than A.",
+      options1: ["older", "younger", "old", "more old"],
+      options2: ["older", "younger", "young", "more young"],
+      ans1: "older",
+      ans2: "younger"
+    },
+    {
+      img: "images-bigger/more-money.png",
+      instruction: "【問題5】持っているお金の量を比べて、正しい言葉を選ぼう。",
+      // has got から has に変更したよ！
+      template: "C has [blank1] money than A, [break]but [blank2] money than B.",
+      options1: ["more", "less", "fewer", "much"],
+      options2: ["more", "less", "fewer", "little"],
+      ans1: "more",
+      ans2: "less"
+    },
+    {
+      img: "images-bigger/work-hard.png",
+      instruction: "【問題6】働く熱心さを比べて、正しい言葉を選ぼう。",
+      template: "C works [blank1] than A, [break]but not [blank2] B.",
+      options1: ["harder", "less hard", "more hard", "hardly"],
+      options2: ["as hard as", "harder than", "so harder", "as harder as"],
+      ans1: "harder",
+      ans2: "as hard as"
+    }
+  ];
+
+  let currentIdx = 0;
+  let isAnswered = false;
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function loadQuestion() {
+    const q = quizData[currentIdx];
+    isAnswered = false;
+    
+    document.getElementById('feedbackField').textContent = "";
+    document.getElementById('feedbackField').style.color = "initial";
+    
+    const actionBtn = document.getElementById('actionBtn');
+    actionBtn.textContent = "答えをチェック";
+    actionBtn.style.backgroundColor = "var(--success-green)";
+    actionBtn.style.boxShadow = "0 4px 0 #2e7d32";
+
+    document.getElementById('progressBar').style.width = `${(currentIdx / quizData.length) * 100}%`;
+    document.getElementById('progressText').textContent = `${currentIdx + 1} / ${quizData.length} 問目`;
+
+    document.getElementById('qImage').src = q.img;
+    document.getElementById('qInstruction').textContent = q.instruction;
+
+    let sentenceHtml = q.template;
+
+    let s1 = `<select id="select1"><option value="">--選ぶ--</option>`;
+    const shufOpts1 = shuffle([...q.options1]);
+    shufOpts1.forEach(opt => { s1 += `<option value="${opt}">${opt}</option>`; });
+    s1 += `</select>`;
+
+    let s2 = `<select id="select2"><option value="">--選ぶ--</option>`;
+    const shufOpts2 = shuffle([...q.options2]);
+    shufOpts2.forEach(opt => { s2 += `<option value="${opt}">${opt}</option>`; });
+    s2 += `</select>`;
+
+    sentenceHtml = sentenceHtml.replace("[blank1]", s1).replace("[blank2]", s2).replace("[break]", "<span class='break-line'></span>");
+    document.getElementById('qSentence').innerHTML = sentenceHtml;
+  }
+
+  function handleAction() {
+    if (!isAnswered) {
+      const sel1 = document.getElementById('select1');
+      const sel2 = document.getElementById('select2');
+      const val1 = sel1.value;
+      const val2 = sel2.value;
+
+      if (val1 === "" || val2 === "") {
+        alert("両方の空欄を選んでね！");
+        return;
+      }
+
+      const q = quizData[currentIdx];
+
+      if (val1 === q.ans1 && val2 === q.ans2) {
+        document.getElementById('feedbackField').textContent = "✨ 正解！素晴らしい！ ✨";
+        document.getElementById('feedbackField').style.color = "#2e7d32";
+        sel1.classList.add('correct-select');
+        sel2.classList.add('correct-select');
+        
+        const actionBtn = document.getElementById('actionBtn');
+        actionBtn.textContent = "次の問題へ";
+        actionBtn.style.backgroundColor = "var(--accent-orange)";
+        actionBtn.style.boxShadow = "0 4px 0 #b36b00";
+        isAnswered = true;
+      } else {
+        document.getElementById('feedbackField').textContent = "❌ もういちど画像を見て考えてみよう！";
+        document.getElementById('feedbackField').style.color = "#c62828";
+      }
+    } else {
+      currentIdx++;
+      if (currentIdx < quizData.length) {
+        loadQuestion();
+      } else {
+        document.getElementById('game-content').innerHTML = "<div class='celebration-text'>🎉 全問クリア！比較のマスターだね！ 🎉</div>";
+        document.getElementById('progressBar').style.width = "100%";
+        document.getElementById('progressText').textContent = `${quizData.length} / ${quizData.length} 問目`;
+      }
+    }
+  }
+
+  window.onload = function() {
+    loadQuestion();
+  };
+</script>
+</body>
+</html>
