@@ -328,7 +328,7 @@
 <div class="tab-container">
   <button class="tab-btn active" onclick="switchTab('all')">すべての問題 (20問)</button>
   <button class="tab-btn" onclick="switchTab('sec1')">第1部：選択問題 (10問)</button>
-  <button class="tab-btn" onclick="switchTab('sec2')">第2部：一番... (5问)</button>
+  <button class="tab-btn" onclick="switchTab('sec2')">第2部：一番... (5問)</button>
   <button class="tab-btn" onclick="switchTab('sec3')">第3部：〜の1つ (5問)</button>
 </div>
 
@@ -769,7 +769,8 @@
         `;
         contentDiv.appendChild(qBlock);
 
-        const aBlock = document.className = 'key-item';
+        const aBlock = document.createElement('div');
+        aBlock.className = 'key-item';
         aBlock.innerHTML = `<b>【第3部】（${qCount3}）</b> ${item.en_full}`;
         answerDiv.appendChild(aBlock);
         qCount3++;
