@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検3級 文法 14章 比較 Part 5</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary-blue: #1e88e5;
+    --accent-orange: #ff9800;
+    --text-dark: #2c3e50;
+    --bg-color: #f0f7ff;
+    --border-color: #bbdefb;
+    --purple-accent: #8e24aa;
+  }
+
+  body {
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "HGMaruGothicMPRO", sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+  }
+
+  .container {
+    background: white;
+    max-width: 900px;
+    width: 100%;
+    padding: 35px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.08);
+    min-height: 550px;
+    margin-top: 15px;
+  }
+
+  h2 {
+    color: var(--primary-blue);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  /* タブメニューのスタイル */
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 900px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 10px 18px;
+    border: 2px solid var(--border-color);
+    background-color: white;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .tab-btn:hover {
+    background-color: #e3f2fd;
+    border-color: var(--primary-blue);
+  }
+
+  .tab-btn.active {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+    box-shadow: 0 4px 10px rgba(30, 136, 229, 0.3);
+  }
+
+  .progress-container {
+    width: 100%;
+    background-color: #eee;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    height: 8px;
+  }
+  .progress-bar {
+    height: 100%;
+    background-color: var(--accent-orange);
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  .progress-text {
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .question-box {
+    font-size: 1.25rem;
+    line-height: 2.0;
+    margin-bottom: 30px;
+    text-align: left;
+    min-height: 100px;
+  }
+
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .choice-card-btn {
+    padding: 15px 10px;
+    border: 2px solid var(--border-color);
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    text-align: center;
+    color: var(--text-dark);
+    transition: all 0.2s;
+    font-family: inherit;
+    font-weight: bold;
+  }
+
+  .choice-card-btn:hover {
+    border-color: var(--primary-blue);
+    background-color: #e3f2fd;
+  }
+
+  .choice-card-btn.selected {
+    border-color: var(--accent-orange);
+    background-color: #fff3e0;
+  }
+
+  .word-btn {
+    background-color: white;
+    color: var(--text-dark);
+    border: 2px solid var(--primary-blue);
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 5px;
+    display: inline-block;
+  }
+
+  .word-btn.used {
+    border-color: #eee;
+    color: #ccc;
+    pointer-events: none;
+  }
+
+  .correct-word {
+    color: #e74c3c;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 0 5px;
+  }
+
+  .answer-area {
+    min-height: 80px;
+    border-bottom: 2px solid #90caf9;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    background-color: #f7faff;
+    border-radius: 10px;
+  }
+
+  .celebration-text {
+    font-size: 2rem;
+    color: #2e7d32;
+    font-weight: bold;
+    text-align: center;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    line-height: 1.6;
+    padding: 30px 0;
+  }
+
+  @keyframes popIn {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .action-btn {
+    padding: 18px 50px;
+    font-size: 1.2rem;
+    background-color: #43a047;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 0 #2e7d32;
+    display: block;
+    margin: 20px auto;
+  }
+
+  #printable-sheet { display: none; }
+
+  @media (max-width: 600px) {
+    .container { padding: 20px; }
+    .question-box { font-size: 1.1rem; line-height: 1.6; }
+    .choice-grid { grid-template-columns: 1fr; }
+    .choice-card-btn { padding: 15px; font-size: 1rem; text-align: left; }
+    .word-btn { font-size: 1rem; padding: 8px 12px; margin: 3px; }
+    .celebration-text { font-size: 1.4rem; }
+    .tab-btn { font-size: 0.85rem; padding: 8px 12px; }
+  }
+
+  /* --- 印刷時のCSS設定 --- */
+  @media print {
+    @page {
+      margin: 15mm 12mm;
+    }
+    
+    .container, h2, .tab-container { display: none !important; }
+    
+    body {
+      background-color: white;
+      padding: 0;
+      margin: 0;
+      color: black;
+      font-family: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "HGMaruGothicMPRO", sans-serif;
+      width: 100% !important;
+      max-width: 100% !important;
+      display: block !important;
+    }
+    
+    #printable-sheet {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    
+    .sheet-header {
+      text-align: center;
+      border-bottom: 2px solid #333;
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+    }
+    
+    .sheet-title {
+      font-size: 16pt;
+      font-weight: bold;
+      margin: 0 0 10px 0;
+    }
+
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      margin: 20px 0 12px 0;
+      background-color: #f5f5f5 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      padding: 6px;
+      border-left: 4px solid #333;
+    }
+    
+    .sheet-question {
+      margin-bottom: 22px;
+      page-break-inside: avoid;
+    }
+    
+    .q-text {
+      font-size: 10.5pt;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    
+    .q-line {
+      border-bottom: 1px dashed #666;
+      height: 32px;
+      width: 98%;
+      margin-bottom: 6px;
+    }
+
+    .word-hint {
+      font-size: 9.5pt;
+      color: #444;
+      font-family: "Times New Roman", serif;
+      font-style: italic;
+      padding-left: 15px;
+    }
+    
+    .answer-key-section {
+      page-break-before: always;
+      margin-top: 30px;
+      border-top: 2px dashed #333;
+      padding-top: 15px;
+      font-size: 10pt;
+    }
+    
+    .key-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .key-item { 
+      margin-bottom: 6px; 
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h2>英検3級 文法 14章 比較 Part 5</h2>
+
+<div class="tab-container">
+  <button class="tab-btn active" onclick="switchTab('all')">すべての問題 (20問)</button>
+  <button class="tab-btn" onclick="switchTab('sec1')">第1部：選択問題 (10問)</button>
+  <button class="tab-btn" onclick="switchTab('sec2')">第2部：一番... (5问)</button>
+  <button class="tab-btn" onclick="switchTab('sec3')">第3部：〜の1つ (5問)</button>
+</div>
+
+<div class="container">
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-text" id="progressText">0 / 0問目</div>
+  
+  <div id="game-content">
+    <div class="question-box" id="qText"></div>
+    <div id="ui-area"></div>
+    <div id="feedback-area" style="text-align:center; min-height: 50px;"></div>
+    <button class="action-btn" id="checkBtn" style="display:none;" onclick="handleCheck()">答えをチェック</button>
+    <button class="action-btn" id="nextBtn" style="display:none; background-color: var(--accent-orange); box-shadow: 0 4px 0 #b36b00;" onclick="nextQuestion()">次の問題へ</button>
+  </div>
+</div>
+
+<div id="printable-sheet">
+  <div class="sheet-header">
+    <h1 class="sheet-title">英検3級 文法 14章 比較 Part 5</h1>
+  </div>
+  <div id="sheet-content"></div>
+  <div class="answer-key-section">
+    <h3>【Answer Key / 解答】</h3>
+    <div id="sheet-answers" class="key-grid"></div>
+  </div>
+</div>
+
+<script>
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  const allQuizData = [
+    // --- 【第1部】 比較級・最上級の選択問題 (10問) ---
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "キリンはライオンよりも背が高いです。", 
+      base: "A giraffe is <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> than a lion.", 
+      print_base: "A giraffe is ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) than a lion.", 
+      choices: ["taller", "tall", "tallest", "more tall"], 
+      ans: "taller" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "私の学校で一番速く走るスプリンター（走者）はだれですか。", 
+      base: "Who is the <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> runner in our school?", 
+      print_base: "Who is the ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) runner in our school?", 
+      choices: ["fastest", "faster", "fast", "most fast"], 
+      ans: "fastest" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "このビデオゲームはあのゲームよりもワクワクします（おもしろいです）。", 
+      base: "This video game is <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> than that one.", 
+      print_base: "This video game is ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) than that one.", 
+      choices: ["more exciting", "exciting", "excitinger", "most exciting"], 
+      ans: "more exciting" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "昨日は熱がありましたが、今日は少し気分が良いです。", 
+      base: "I had a fever yesterday, but I feel a bit <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> today.", 
+      print_base: "I had a fever yesterday, but I feel a bit ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) today.", 
+      choices: ["better", "good", "best", "well"], 
+      ans: "better" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "日本で最も人気のあるお菓子は何ですか。", 
+      base: "What is the <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> snack in Japan?", 
+      print_base: "What is the ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) snack in Japan?", 
+      choices: ["most popular", "more popular", "popular", "popularer"], 
+      ans: "most popular" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "電車とバスでは、どちらの方が速いですか。", 
+      base: "Which is <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span>, the train or the bus?", 
+      print_base: "Which is ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ), the train or the bus?", 
+      choices: ["faster", "fast", "fastest", "more fast"], 
+      ans: "faster" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "富士山は日本で一番高い山です。", 
+      base: "Mount Fuji is the <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> mountain in Japan.", 
+      print_base: "Mount Fuji is the ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) mountain in Japan.", 
+      choices: ["highest", "higher", "high", "most high"], 
+      ans: "highest" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "この本はあの本よりもおもしろいです。", 
+      base: "This book is <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> than that one.", 
+      print_base: "This book is ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) than that one.", 
+      choices: ["more interesting", "interesting", "interestinger", "most interesting"], 
+      ans: "more interesting" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "私の町では、1月は一年の中で最も寒い月です。", 
+      base: "January is the <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span> month of the year in my town.", 
+      print_base: "January is the ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) month of the year in my town.", 
+      choices: ["coldest", "colder", "cold", "most cold"], 
+      ans: "coldest" 
+    },
+    { 
+      type: "choice", 
+      sec: 1,
+      ja: "カナダと日本、どちらの方が大きいですか。", 
+      base: "Which is <span id='blank'>( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</span>, Canada or Japan?", 
+      print_base: "Which is ( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ), Canada or Japan?", 
+      choices: ["larger", "large", "largest", "more large"], 
+      ans: "larger" 
+    },
+
+    // --- 【第2部】 「今までに〜した中で一番...」 の並べ替え問題 (5問) ---
+    { 
+      type: "sort", 
+      sec: 2,
+      ja: "【状況】とても面白いお笑い番組を見ました。<br>「これは僕が今までに見た中で一番面白い番組です！」", 
+      en_full: "That's the funniest show that I have ever seen.", 
+      words: ["That's", "the", "funniest", "show", "that", "I", "have", "ever", "seen."] 
+    },
+    { 
+      type: "sort", 
+      sec: 2,
+      ja: "【状況】友達がとても素敵なプレゼントをくれました。<br>「これは私が今までに受け取った中で一番良いプレゼントです！」", 
+      en_full: "That's the best present that I have ever received.", 
+      words: ["That's", "the", "best", "present", "that", "I", "have", "ever", "received."] 
+    },
+    { 
+      type: "sort", 
+      sec: 2,
+      ja: "【状況】テーマパークで怖いおばけ屋敷に入りました。<br>「それは私が今までに訪問した中で一番怖い場所でした。」", 
+      en_full: "That was the scariest place that I have ever visited.", 
+      words: ["That", "was", "the", "scariest", "place", "that", "I", "have", "ever", "visited."] 
+    },
+    { 
+      type: "sort", 
+      sec: 2,
+      ja: "【状況】給食で食べたカレーがすごく美味しかったとき。<br>「これは私が今までに食べた中で一番美味しいカレーです！」", 
+      en_full: "This is the most delicious curry that I have ever eaten.", 
+      words: ["This", "is", "the", "most", "delicious", "curry", "that", "I", "have", "ever", "eaten."] 
+    },
+    { 
+      type: "sort", 
+      sec: 2,
+      ja: "【状況】とても親切な先生に出会ったとき。<br>「彼女は私が今までに会った中で一番親切な人です。」", 
+      en_full: "She is the kindest person that I have ever met.", 
+      words: ["She", "is", "the", "kindest", "person", "that", "I", "have", "ever", "met."] 
+    },
+
+    // --- 【第3部】 「最も…な〜の1つ（ひとり）」 の並べ替え問題 (5問) ---
+    { 
+      type: "sort", 
+      sec: 3,
+      ja: "サッカーは世界で最も人気のあるスポーツの1つです。", 
+      en_full: "Soccer is one of the most popular sports in the world.", 
+      words: ["Soccer", "is", "one", "of", "the", "most", "popular", "sports", "in", "the", "world."] 
+    },
+    { 
+      type: "sort", 
+      sec: 3,
+      ja: "ケンは私たちのチームで最も背が高い選手の1人です。", 
+      en_full: "Ken is one of the tallest players in our team.", 
+      words: ["Ken", "is", "one", "of", "the", "tallest", "players", "in", "our", "team."] 
+    },
+    { 
+      type: "sort", 
+      sec: 3,
+      ja: "これは私たちの町で最も古い建物の1つです。", 
+      en_full: "This is one of the oldest buildings in our town.", 
+      words: ["This", "is", "one", "of", "the", "oldest", "buildings", "in", "our", "town."] 
+    },
+    { 
+      type: "sort", 
+      sec: 3,
+      ja: "そのシロクマは動物園で一番かわいい動物の1頭です。", 
+      en_full: "The polar bear is one of the cutest animals in the zoo.", 
+      words: ["The", "polar", "bear", "is", "one", "of", "the", "cutest", "animals", "in", "the", "zoo."] 
+    },
+    { 
+      type: "sort", 
+      sec: 3,
+      ja: "京都は日本で最も有名な都市の1つです。", 
+      en_full: "Kyoto is one of the most famous cities in Japan.", 
+      words: ["Kyoto", "is", "one", "of", "the", "most", "famous", "cities", "in", "Japan."] 
+    }
+  ];
+
+  let currentQuizData = [...allQuizData];
+  let currentIdx = 0;
+  let selectedChoice = null;
+  let userSort = [];
+
+  function switchTab(mode) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    if (mode === 'all') {
+      currentQuizData = [...allQuizData];
+    } else if (mode === 'sec1') {
+      currentQuizData = allQuizData.filter(q => q.sec === 1);
+    } else if (mode === 'sec2') {
+      currentQuizData = allQuizData.filter(q => q.sec === 2);
+    } else if (mode === 'sec3') {
+      currentQuizData = allQuizData.filter(q => q.sec === 3);
+    }
+
+    currentIdx = 0;
+    loadQuestion();
+  }
+
+  function loadQuestion() {
+    const q = currentQuizData[currentIdx];
+    const ui = document.getElementById('ui-area');
+    const qText = document.getElementById('qText');
+    const feedback = document.getElementById('feedback-area');
+    
+    document.getElementById('progressBar').style.width = `${((currentIdx) / currentQuizData.length) * 100}%`;
+    document.getElementById('progressText').textContent = `${currentIdx + 1} / ${currentQuizData.length} 問目`;
+    
+    document.getElementById('nextBtn').style.display = "none";
+    document.getElementById('checkBtn').style.display = "none";
+    feedback.innerHTML = "";
+    ui.innerHTML = "";
+    selectedChoice = null;
+
+    if (q.type === "choice") {
+      qText.innerHTML = `<div style="color:var(--primary-blue); font-size:1rem; margin-bottom:10px; font-weight:bold;">【第1部：比較級・最上級えらび】<br>${q.ja}</div>` + q.base;
+      const grid = document.createElement('div');
+      grid.className = 'choice-grid';
+      const shuffledChoices = shuffle([...q.choices]);
+      shuffledChoices.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-card-btn';
+        btn.textContent = c;
+        btn.onclick = () => {
+          document.querySelectorAll('.choice-card-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedChoice = c;
+          document.getElementById('checkBtn').style.display = "block";
+        };
+        grid.appendChild(btn);
+      });
+      ui.appendChild(grid);
+    } else {
+      const secTitle = q.sec === 2 ? "【第2部：「今までに〜した中で一番...」並べ替え】" : "【第3部：「最も…な〜の1つ（ひとり）」並べ替え】";
+      const secColor = q.sec === 2 ? "var(--accent-orange)" : "var(--purple-accent)";
+
+      qText.innerHTML = `<div style="color:${secColor}; font-size:1.1rem; margin-bottom:15px; font-weight:bold;">${secTitle}<br>${q.ja}</div>`;
+      const area = document.createElement('div');
+      area.className = 'answer-area';
+      area.id = 'answerArea';
+      area.innerHTML = '<span style="color:#aaa;">下のパーツをタップして正しい順番に並べてね</span>';
+      
+      const bank = document.createElement('div');
+      bank.style.textAlign = "center";
+      
+      userSort = [];
+      const shuffledWords = shuffle([...q.words]);
+      shuffledWords.forEach(w => {
+        const btn = document.createElement('button');
+        btn.className = 'word-btn';
+        btn.textContent = w;
+        btn.onclick = () => {
+          if (btn.classList.contains('used')) return;
+          if (userSort.length === 0) area.innerHTML = "";
+          userSort.push({ text: w, btn: btn });
+          btn.classList.add('used');
+          renderSort();
+        };
+        bank.appendChild(btn);
+      });
+      ui.appendChild(area);
+      ui.appendChild(bank);
+    }
+  }
+
+  function renderSort() {
+    const area = document.getElementById('answerArea');
+    area.innerHTML = "";
+    userSort.forEach((item, idx) => {
+      const b = document.createElement('button');
+      b.className = 'word-btn';
+      b.style.margin = "2px";
+      b.textContent = item.text;
+      b.onclick = () => {
+        item.btn.classList.remove('used');
+        userSort.splice(idx, 1);
+        renderSort();
+        if(userSort.length === 0) area.innerHTML = '<span style="color:#aaa;">下のパーツをタップして正しい順番に並べてね</span>';
+      };
+      area.appendChild(b);
+    });
+    
+    if (userSort.length === currentQuizData[currentIdx].words.length) {
+      document.getElementById('checkBtn').style.display = "block";
+    } else {
+      document.getElementById('checkBtn').style.display = "none";
+    }
+  }
+
+  function handleCheck() {
+    const q = currentQuizData[currentIdx];
+    if (q.type === "choice") {
+      if (selectedChoice === q.ans) {
+        document.getElementById('blank').innerHTML = `<span class="correct-word">${q.ans}</span>`;
+        showSuccess();
+      } else {
+        alert("もう一度考えてみよう！");
+      }
+    } else {
+      let userStr = userSort.map(i => i.text).join(" ");
+      let cleanUser = userStr.replace(/[\.,\?]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+      let cleanAns = q.en_full.replace(/[\.,\?]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+
+      if (cleanUser === cleanAns) {
+        document.getElementById('ui-area').innerHTML = `<div class="celebration-text">✨ ${q.en_full} ✨</div>`;
+        showSuccess();
+      } else {
+        alert("言葉の順番を確認してみてね！");
+      }
+    }
+  }
+
+  function showSuccess() {
+    document.getElementById('checkBtn').style.display = "none";
+    document.getElementById('nextBtn').style.display = "block";
+  }
+
+  function nextQuestion() {
+    currentIdx++;
+    if (currentIdx < currentQuizData.length) loadQuestion();
+    else {
+      document.getElementById('game-content').innerHTML = "<div class='celebration-text'>🎉 全問クリア！素晴らしい！ 🎉</div>";
+      document.getElementById('progressBar').style.width = "100%";
+      document.getElementById('progressText').textContent = `${currentQuizData.length} / ${currentQuizData.length} 問目`;
+    }
+  }
+
+  function generatePrintSheet() {
+    const contentDiv = document.getElementById('sheet-content');
+    const answerDiv = document.getElementById('sheet-answers');
+    
+    contentDiv.innerHTML = "";
+    answerDiv.innerHTML = "";
+
+    // 第1部：穴埋め選択問題
+    const sec1 = document.createElement('div');
+    sec1.className = 'section-title';
+    sec1.textContent = '【第1部】選択問題：カッコ (  ) に入る最も適切な表現を選びなさい。';
+    contentDiv.appendChild(sec1);
+    
+    let qCount1 = 1;
+    allQuizData.forEach((item) => {
+      if (item.sec === 1) {
+        let printChoices = shuffle([...item.choices]);
+
+        const qBlock = document.createElement('div');
+        qBlock.className = 'sheet-question';
+        qBlock.innerHTML = `
+          <div class="q-text">${qCount1}. ${item.ja}</div>
+          <div style="font-size:11pt; font-family:'Times New Roman', serif; margin: 4px 0 4px 20px;">${item.print_base}</div>
+          <div class="word-hint">選択肢：[ ${printChoices.join(' &nbsp;/ &nbsp;')} ]</div>
+        `;
+        contentDiv.appendChild(qBlock);
+
+        const aBlock = document.createElement('div');
+        aBlock.className = 'key-item';
+        aBlock.innerHTML = `<b>【第1部】（${qCount1}）</b> ${item.ans}`;
+        answerDiv.appendChild(aBlock);
+        qCount1++;
+      }
+    });
+
+    // 第2部：「今までに〜した中で一番...」 並べ替え問題
+    const sec2 = document.createElement('div');
+    sec2.className = 'section-title';
+    sec2.textContent = '【第2部】並べ替え問題：[ ] 内の語句を並べ替えて「今までに〜した中で一番...」の文を完成させなさい。';
+    contentDiv.appendChild(sec2);
+
+    let qCount2 = 1;
+    allQuizData.forEach((item) => {
+      if (item.sec === 2) {
+        let shuffledWords = shuffle([...item.words]);
+        
+        const qBlock = document.createElement('div');
+        qBlock.className = 'sheet-question';
+        qBlock.innerHTML = `
+          <div class="q-text">${qCount2}. ${item.ja}</div>
+          <div class="q-line"></div>
+          <div class="word-hint">語群：[ &nbsp;${shuffledWords.join(' &nbsp; / &nbsp; ')}&nbsp; ]</div>
+        `;
+        contentDiv.appendChild(qBlock);
+
+        const aBlock = document.createElement('div');
+        aBlock.className = 'key-item';
+        aBlock.innerHTML = `<b>【第2部】（${qCount2}）</b> ${item.en_full}`;
+        answerDiv.appendChild(aBlock);
+        qCount2++;
+      }
+    });
+
+    // 第3部：「最も…な〜の1つ（ひとり）」 並べ替え問題
+    const sec3 = document.createElement('div');
+    sec3.className = 'section-title';
+    sec3.textContent = '【第3部】並べ替え問題：[ ] 内の語句を並べ替えて「最も…な〜の1つ（ひとり）」の文を完成させなさい。';
+    contentDiv.appendChild(sec3);
+
+    let qCount3 = 1;
+    allQuizData.forEach((item) => {
+      if (item.sec === 3) {
+        let shuffledWords = shuffle([...item.words]);
+        
+        const qBlock = document.createElement('div');
+        qBlock.className = 'sheet-question';
+        qBlock.innerHTML = `
+          <div class="q-text">${qCount3}. ${item.ja}</div>
+          <div class="q-line"></div>
+          <div class="word-hint">語群：[ &nbsp;${shuffledWords.join(' &nbsp; / &nbsp; ')}&nbsp; ]</div>
+        `;
+        contentDiv.appendChild(qBlock);
+
+        const aBlock = document.className = 'key-item';
+        aBlock.innerHTML = `<b>【第3部】（${qCount3}）</b> ${item.en_full}`;
+        answerDiv.appendChild(aBlock);
+        qCount3++;
+      }
+    });
+  }
+
+  window.onload = function() {
+    loadQuestion();
+    generatePrintSheet();
+  };
+</script>
+</body>
+</html>
