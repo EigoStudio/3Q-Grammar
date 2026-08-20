@@ -3,52 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Step by Step Towards EIKEN Grade5</title>
+    <title>Step by Step Towards EIKEN Grade3</title>
     <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
     
     <style>
         body {
-            /* 全体にKosugi Maruを適用 */
             font-family: 'Kosugi Maru', sans-serif;
-            background-color: #f0f8ff; /* 少し青みがかった優しい背景色 */
+            background-color: #f0f8ff;
             color: #333;
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             margin: 0;
         }
         h1 {
             color: #2c3e50;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             font-size: 28px;
-            /* タイトルに少し影をつけて目立たせる */
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         ul {
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
-            max-width: 1000px;
+            /* PC・タブレットで綺麗な3カラムに固定 */
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 960px;
             margin: 0 auto;
         }
         li a {
-            display: block;
-            padding: 15px 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 140px;
+            padding: 20px 15px;
             background-color: #ffffff;
-            border: 3px solid #ffcc00; /* 元気な黄色い枠線 */
-            border-radius: 15px; /* 角をさらに丸く */
+            border: 3px solid #ffcc00;
+            border-radius: 18px;
             text-decoration: none;
-            color: #d35400; /* オレンジ系の文字色 */
+            color: #d35400;
             font-weight: bold;
+            font-size: 15px;
+            line-height: 1.6;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 0 #e6b800; /* ボタンっぽく立体的な影 */
+            box-shadow: 0 4px 0 #e6b800;
+            box-sizing: border-box;
         }
-        /* マウスを乗せた時やタップした時 */
         li a:hover {
-            transform: translateY(2px); /* 少し沈む動き */
+            transform: translateY(2px);
             box-shadow: 0 2px 0 #e6b800;
             background-color: #fffdf0;
+        }
+
+        /* スマホ等の狭い画面では見やすさを優先して1〜2カラムに調整 */
+        @media (max-width: 768px) {
+            ul {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            ul {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -57,44 +74,33 @@
     <h1>3級 文法問題 目次</h1>
     <ul>
 
-      <li><a href="3Q-grammar-Unit13-1.html">13章 比較 Part1<br>
+        <li><a href="3Q-grammar-Unit13-1.html">13章 比較 Part1<br>
 穴埋め問題&並べ替え問題 16問!<br>
-ワークシート印刷対応
-</a></li>
+ワークシート印刷対応</a></li>
 
         <li><a href="3Q-grammar-Unit13-2.html">13章 比較 Part2<br>
 プルダウン形式 4問!<br>
-〜er than / but not as 〜 as
-</a></li>
+〜er than / but not as 〜 as</a></li>
 
         <li><a href="3Q-grammar-Unit13-3-situations.html">13章 比較 Part3<br>
-3 situations<br>
-4 questions each<br>
-            Type in the answers!<br>
-            報告機能つき！
-</a></li>
+3 situations (各4問)<br>
+Type in the answers!<br>
+報告機能つき！</a></li>
 
-         <li><a href="3Q-grammar-Unit13-4-situations.html">13章 比較 Part4<br>
-4 situations<br>
-3 questions each<br>
-             Choose the correct answer!<br>
-            報告機能つき！
-</a></li>
+        <li><a href="3Q-grammar-Unit13-4-situations.html">13章 比較 Part4<br>
+4 situations (各3問)<br>
+Choose the correct answer!<br>
+報告機能つき！</a></li>
 
         <li><a href="3Q-grammar-Unit13-5.html">13章 比較 Part5<br>
-比較・最上級の選択問題 10問<br>
-            「今まで〜した中で一番... 」並べ替え問題 5問<br>
-            「もっとも...な〜の一つ」並べ替え問題 5問      
-</a></li>
+比較・最上級選択 10問<br>
+並べ替え問題 10問</a></li>
 
         <li><a href="3Q-grammar-Unit14-1.html">14章 動詞の形を選ぶ問題 Part1<br>
 不定詞の副詞的用法<br>
-            プルダウン形式穴埋め問題 4問 x 2pages<br>
-            並べ替え問題 5問 <br>
-            和訳を選ぶ２択問題<br>
-            パスコード入力、ワークシート印刷
-</a></li>
-      
+穴埋め・並べ替え・和訳選択<br>
+ワークシート印刷対応</a></li>
+        
     </ul>
 
 </body>
