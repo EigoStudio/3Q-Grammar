@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検3級 文法 14章 Part4 前置詞 + 動名詞</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary-blue: #1e88e5;
+    --accent-orange: #ff9800;
+    --text-dark: #2c3e50;
+    --bg-color: #f0f7ff;
+    --border-color: #bbdefb;
+    --success-green: #43a047;
+  }
+
+  body {
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "HGMaruGothicMPRO", sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+  }
+
+  .container {
+    background: white;
+    max-width: 850px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.08);
+    margin-top: 20px;
+  }
+
+  h2 {
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* タブUI */
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 5px 9px;
+    border: 2px solid var(--primary-blue);
+    background-color: white;
+    color: var(--text-dark);
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .tab-btn:hover {
+    background-color: #e3f2fd;
+  }
+
+  .tab-btn.active {
+    background-color: var(--primary-blue);
+    color: white;
+  }
+
+  .progress-container {
+    width: 100%;
+    background-color: #eee;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    height: 8px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background-color: var(--accent-orange);
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  .progress-text {
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  /* ステップカード */
+  .step-card {
+    background: #f7faff;
+    border: 2px dashed var(--border-color);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .step-header {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .step-badge {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  .question-instruction {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+  }
+
+  .phrase-select-area {
+    font-size: 1.2rem;
+    line-height: 2;
+    margin-bottom: 15px;
+  }
+
+  select {
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 6px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-dark);
+    background-color: white;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: all 0.2s;
+    vertical-align: middle;
+  }
+
+  select:hover {
+    border-color: var(--primary-blue);
+  }
+
+  select:focus {
+    outline: none;
+    border-color: var(--accent-orange);
+  }
+
+  /* 並べ替え問題スタイル */
+  .word-btn {
+    background-color: white;
+    color: var(--text-dark);
+    border: 2px solid var(--primary-blue);
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 4px;
+    display: inline-block;
+    font-family: inherit;
+  }
+
+  .word-btn.used {
+    border-color: #eee;
+    color: #ccc;
+    pointer-events: none;
+  }
+
+  .answer-area {
+    min-height: 75px;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 10px;
+  }
+
+  .celebration-text {
+    font-size: 1.8rem;
+    color: #2e7d32;
+    font-weight: bold;
+    text-align: center;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    line-height: 1.6;
+    padding: 20px 0;
+  }
+
+  @keyframes popIn {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .action-btn {
+    padding: 12px 35px;
+    font-size: 1.05rem;
+    background-color: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 0 #2e7d32;
+    display: block;
+    margin: 15px auto;
+    font-family: inherit;
+    transition: transform 0.1s, background-color 0.2s;
+  }
+
+  .action-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+
+  #printable-sheet { display: none; }
+
+  @media (max-width: 600px) {
+    .container { padding: 15px; }
+    .question-instruction { font-size: 1.05rem; }
+    .word-btn { font-size: 0.9rem; padding: 6px 10px; margin: 2px; }
+    .celebration-text { font-size: 1.3rem; }
+    select { font-size: 0.95rem; padding: 5px; }
+  }
+
+  /* --- 印刷用スタイル --- */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 8mm 10mm;
+    }
+
+    html, body {
+      background-color: white !important;
+      color: black !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+
+    .container, h2, .tab-container {
+      display: none !important;
+    }
+
+    #printable-sheet {
+      display: block !important;
+      position: relative !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-family: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "HGMaruGothicMPRO", sans-serif !important;
+    }
+
+    .sheet-header {
+      text-align: center;
+      border-bottom: 2px solid #000;
+      margin-bottom: 6px;
+      padding-bottom: 3px;
+    }
+
+    .sheet-title {
+      font-size: 12pt;
+      font-weight: bold;
+      margin: 0 0 2px 0;
+    }
+
+    .verb-list-box {
+      border: 1.5px solid #333;
+      border-radius: 6px;
+      padding: 4px 8px;
+      margin-bottom: 6px;
+      background-color: #fafafa !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .verb-list-title {
+      font-size: 7.5pt;
+      font-weight: bold;
+      margin-bottom: 2px;
+      border-bottom: 1px dashed #aaa;
+      padding-bottom: 1px;
+    }
+
+    .verb-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px 8px;
+      font-size: 6.5pt;
+    }
+
+    .verb-words-inline {
+      font-size: 6.8pt;
+      line-height: 1.3;
+      word-spacing: 2px;
+    }
+
+    .section-title {
+      font-size: 8.5pt;
+      font-weight: bold;
+      margin: 8px 0 4px 0;
+      background-color: #f0f0f0 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      padding: 2px 5px;
+      border-left: 4px solid #333;
+    }
+
+    .ws-instruction {
+      font-size: 7.5pt;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .ws-list-1col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* 問題同士の間隔（余白）を広げるよう調整 */
+    .sheet-question {
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+    }
+
+    .q-text {
+      font-size: 8.5pt;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+
+    /* 解答用アンダーラインの余白調整 */
+    .q-line {
+      border-bottom: 1px dashed #666;
+      height: 16px;
+      width: 98%;
+      margin: 6px 0 2px 0;
+    }
+
+    .scramble-header {
+      font-size: 8.5pt;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .scramble-words-inline {
+      font-size: 8pt;
+      color: #222;
+      font-weight: normal;
+    }
+
+    .ja-subtext {
+      font-size: 7.5pt;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    .page-break {
+      page-break-before: always;
+      margin-top: 5px;
+    }
+
+    .answer-key-section {
+      page-break-before: always;
+      margin-top: 10px;
+      border-top: 2px dashed #000;
+      padding-top: 8px;
+      font-size: 7.5pt;
+    }
+
+    .key-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px 8px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h2>英検3級 文法 14章 Part4 前置詞 + 動名詞</h2>
+
+<div class="container">
+  <!-- タブ領域 -->
+  <div class="tab-container" id="tabContainer"></div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-text" id="progressText">問 1 / 10</div>
+
+  <div id="game-content">
+    <!-- STEP 1 -->
+    <div class="step-card" id="step1-card">
+      <div class="step-header">
+        <span class="step-badge">STEP 1</span>
+        <span>適切な前置詞・熟語を選ぼう！</span>
+      </div>
+      <div class="question-instruction" id="s1-inst"></div>
+      <div class="phrase-select-area" id="s1-select-area"></div>
+      <button class="action-btn" id="s1-check-btn" onclick="checkStep1()">STEP 1 完了！</button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-card" id="step2-card" style="display:none;">
+      <div class="step-header">
+        <span class="step-badge">STEP 2</span>
+      </div>
+      <div class="question-instruction" id="s2-inst">後ろに続ける動詞の形を選ぼう！</div>
+      <div class="phrase-select-area" id="s2-select-area"></div>
+      <button class="action-btn" id="s2-check-btn" onclick="checkStep2()">STEP 2 完了！</button>
+    </div>
+
+    <!-- STEP 3 (並べ替え) -->
+    <div class="step-card" id="step3-card" style="display:none;">
+      <div class="step-header">
+        <span class="step-badge">STEP 3</span>
+        <span>完成文を作ろう！（並べ替え）</span>
+      </div>
+      <div class="question-instruction" id="s3-inst"></div>
+      <div class="answer-area" id="answerArea"></div>
+      <div id="wordBank" style="text-align: center;"></div>
+      <button class="action-btn" id="s3-check-btn" style="display:none;" onclick="checkStep3()">答えをチェック</button>
+    </div>
+
+    <div id="feedback-area" style="text-align:center; min-height: 40px;"></div>
+    <button class="action-btn" id="nextBtn" style="display:none; background-color: var(--accent-orange); box-shadow: 0 4px 0 #b36b00;" onclick="nextQuestion()">次の問題へ ➔</button>
+  </div>
+</div>
+
+<!-- 印刷用ワークシート -->
+<div id="printable-sheet">
+  <div class="sheet-header">
+    <h1 class="sheet-title">14章 Part4 前置詞 + 動名詞</h1>
+  </div>
+  
+  <div class="verb-list-box">
+    <div class="verb-list-title">【学習する重要フレーズ（前置詞 + 動名詞）一覧】</div>
+    <div class="verb-grid">
+      <div>□ 〜するのを楽しみに待つ：look forward to -ing</div>
+      <div>□ 〜してくれてありがとう：thank you for -ing</div>
+      <div>□ 〜するのはどうですか：How about -ing?</div>
+      <div>□ 〜するのが得意である：be good at -ing</div>
+      <div>□ 〜するのに飽きている：be tired of -ing</div>
+      <div>□ 〜するのを怖がる：be scared of -ing</div>
+      <div>□ 〜するのにワクワクしている：be excited about -ing</div>
+      <div>□ 〜することによって：by -ing</div>
+      <div>□ 〜する前に：before -ing</div>
+      <div>□ 〜した後に：after -ing</div>
+    </div>
+  </div>
+
+  <div class="verb-list-box">
+    <div class="verb-list-title">【参考表現リスト（組み合わせる動作）】</div>
+    <div class="verb-words-inline">
+      visit Canada / help me / go to the park / play tennis / watch the same show / sleep alone / travel abroad / practice every day / go to bed / finish homework
+    </div>
+  </div>
+
+  <div class="section-title">PART 1: フレーズ構築</div>
+  <div class="ws-instruction">日本語の意味に合うように、適切な英語フレーズ（前置詞＋動名詞）を書きなさい。</div>
+  <div class="ws-list-1col" id="ws-part1"></div>
+
+  <div class="page-break"></div>
+
+  <div class="section-title">PART 2: 並べ替え問題</div>
+  <div class="ws-instruction">語群の単語を並べ替えて正しい英文を完成させなさい。</div>
+  <div class="ws-list-1col" id="ws-part2"></div>
+
+  <div class="answer-key-section">
+    <h3 style="margin:0 0 5px 0;">【Answer Key / 解答】</h3>
+    <div id="sheet-answers" class="key-grid"></div>
+  </div>
+</div>
+
+<script>
+  function shuffle(array) {
+    let arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  const rawData = [
+    {
+      target: "look forward to",
+      meaning: "〜するのを楽しみに待つ",
+      phraseJa: "カナダを訪れるのを楽しみに待つ",
+      phraseEn: "look forward to visiting Canada",
+      step1: {
+        inst: "「〜するのを楽しみに待つ」という意味を作る選択肢を選ぼう。",
+        prefix: "I ",
+        opts: ["look forward to", "be good at", "How about"],
+        ans: "look forward to"
+      },
+      step2: {
+        prefix: "look forward to ",
+        opts: ["visiting", "visit", "to visit"],
+        ans: "visiting"
+      },
+      step3: {
+        inst: "私はカナダを訪れるのを楽しみに待っています。",
+        words: ["I", "am", "looking", "forward", "to", "visiting", "Canada."],
+        correct: "I am looking forward to visiting Canada."
+      }
+    },
+    {
+      target: "thank you for",
+      meaning: "〜してくれてありがとう",
+      phraseJa: "手伝ってくれてありがとう",
+      phraseEn: "thank you for helping me",
+      step1: {
+        inst: "「〜してくれてありがとう」という意味を作る選択肢を選ぼう。",
+        prefix: "",
+        opts: ["Thank you for", "How about", "scared of"],
+        ans: "Thank you for"
+      },
+      step2: {
+        prefix: "Thank you for ",
+        opts: ["helping", "help", "to help"],
+        ans: "helping"
+      },
+      step3: {
+        inst: "私を手伝ってくれてありがとう。",
+        words: ["Thank", "you", "for", "helping", "me."],
+        correct: "Thank you for helping me."
+      }
+    },
+    {
+      target: "How about",
+      meaning: "〜するのはどうですか",
+      phraseJa: "一緒に公園へ行くのはどうですか",
+      phraseEn: "How about going to the park?",
+      step1: {
+        inst: "「〜するのはどうですか（勧誘）」という意味を作る選択肢を選ぼう。",
+        prefix: "",
+        opts: ["How about", "be tired of", "look forward to"],
+        ans: "How about"
+      },
+      step2: {
+        prefix: "How about ",
+        opts: ["going", "go", "to go"],
+        ans: "going"
+      },
+      step3: {
+        inst: "一緒に公園に行くのはどうですか？",
+        words: ["How", "about", "going", "to", "the", "park", "together?"],
+        correct: "How about going to the park together?"
+      }
+    },
+    {
+      target: "be good at",
+      meaning: "〜するのが得意である",
+      phraseJa: "テニスをするのが得意である",
+      phraseEn: "be good at playing tennis",
+      step1: {
+        inst: "「〜するのが得意である」という意味を作る選択肢を選ぼう。",
+        prefix: "He is ",
+        opts: ["good at", "scared of", "excited about"],
+        ans: "good at"
+      },
+      step2: {
+        prefix: "is good at ",
+        opts: ["playing", "play", "to play"],
+        ans: "playing"
+      },
+      step3: {
+        inst: "彼はテニスをするのが得意です。",
+        words: ["He", "is", "good", "at", "playing", "tennis."],
+        correct: "He is good at playing tennis."
+      }
+    },
+    {
+      target: "be tired of",
+      meaning: "〜するのに飽きている / うんざりしている",
+      phraseJa: "同じTV番組を見るのに飽きている",
+      phraseEn: "be tired of watching the same show",
+      step1: {
+        inst: "「〜するのに飽きている・うんざりしている」という意味を作る選択肢を選ぼう。",
+        prefix: "I am ",
+        opts: ["tired of", "excited about", "good at"],
+        ans: "tired of"
+      },
+      step2: {
+        prefix: "am tired of ",
+        opts: ["watching", "watch", "to watch"],
+        ans: "watching"
+      },
+      step3: {
+        inst: "私は同じ番組を見るのに飽きています。",
+        words: ["I", "am", "tired", "of", "watching", "the", "same", "show."],
+        correct: "I am tired of watching the same show."
+      }
+    },
+    {
+      target: "scared of",
+      meaning: "〜するのを怖がる",
+      phraseJa: "暗闇で一人で寝るのを怖がる",
+      phraseEn: "be scared of sleeping alone",
+      step1: {
+        inst: "「〜するのを怖がる」という意味を作る選択肢を選ぼう。",
+        prefix: "She is ",
+        opts: ["scared of", "tired of", "look forward to"],
+        ans: "scared of"
+      },
+      step2: {
+        prefix: "is scared of ",
+        opts: ["sleeping", "sleep", "to sleep"],
+        ans: "sleeping"
+      },
+      step3: {
+        inst: "彼女は一人で寝るのを怖がっています。",
+        words: ["She", "is", "scared", "of", "sleeping", "alone."],
+        correct: "She is scared of sleeping alone."
+      }
+    },
+    {
+      target: "excited about",
+      meaning: "〜するのにワクワクしている",
+      phraseJa: "海外旅行するのにワクワクしている",
+      phraseEn: "be excited about traveling abroad",
+      step1: {
+        inst: "「〜するのにワクワクしている」という意味を作る選択肢を選ぼう。",
+        prefix: "We are ",
+        opts: ["excited about", "good at", "thank you for"],
+        ans: "excited about"
+      },
+      step2: {
+        prefix: "are excited about ",
+        opts: ["traveling", "travel", "to travel"],
+        ans: "traveling"
+      },
+      step3: {
+        inst: "私たちは海外旅行にワクワクしています。",
+        words: ["We", "are", "excited", "about", "traveling", "abroad."],
+        correct: "We are excited about traveling abroad."
+      }
+    },
+    {
+      target: "by",
+      meaning: "〜することによって",
+      phraseJa: "毎日練習することによって",
+      phraseEn: "by practicing every day",
+      step1: {
+        inst: "「〜することによって（手段）」という意味を作る前置詞を選ぼう。",
+        prefix: "You can improve ",
+        opts: ["by", "before", "after"],
+        ans: "by"
+      },
+      step2: {
+        prefix: "by ",
+        opts: ["practicing", "practice", "to practice"],
+        ans: "practicing"
+      },
+      step3: {
+        inst: "あなたは毎日練習することで上達できます。",
+        words: ["You", "can", "improve", "by", "practicing", "every", "day."],
+        correct: "You can improve by practicing every day."
+      }
+    },
+    {
+      target: "before",
+      meaning: "〜する前に",
+      phraseJa: "寝る前に本を読む",
+      phraseEn: "read a book before going to bed",
+      step1: {
+        inst: "「〜する前に」という意味を作る前置詞を選ぼう。",
+        prefix: "",
+        opts: ["before", "after", "by"],
+        ans: "before"
+      },
+      step2: {
+        prefix: "before ",
+        opts: ["going", "go", "to go"],
+        ans: "going"
+      },
+      step3: {
+        inst: "私は寝る前に本を読みます。",
+        words: ["I", "read", "a", "book", "before", "going", "to", "bed."],
+        correct: "I read a book before going to bed."
+      }
+    },
+    {
+      target: "after",
+      meaning: "〜した後に",
+      phraseJa: "宿題を終えた後にテレビを見る",
+      phraseEn: "watch TV after finishing homework",
+      step1: {
+        inst: "「〜した後に」という意味を作る前置詞を選ぼう。",
+        prefix: "",
+        opts: ["after", "before", "by"],
+        ans: "after"
+      },
+      step2: {
+        prefix: "after ",
+        opts: ["finishing", "finish", "to finish"],
+        ans: "finishing"
+      },
+      step3: {
+        inst: "私は宿題を終えた後にテレビを見ます。",
+        words: ["I", "watch", "TV", "after", "finishing", "my", "homework."],
+        correct: "I watch TV after finishing my homework."
+      }
+    }
+  ];
+
+  let activeData = [];
+  let currentIdx = 0;
+  let userSort = [];
+
+  function initTabs() {
+    const container = document.getElementById('tabContainer');
+    container.innerHTML = "";
+    activeData.forEach((p, idx) => {
+      const btn = document.createElement('button');
+      btn.className = `tab-btn ${idx === currentIdx ? 'active' : ''}`;
+      btn.textContent = `問 ${idx + 1}`;
+      btn.onclick = () => {
+        currentIdx = idx;
+        renderTabs();
+        loadPage();
+      };
+      container.appendChild(btn);
+    });
+  }
+
+  function renderTabs() {
+    const btns = document.querySelectorAll('.tab-btn');
+    btns.forEach((btn, idx) => {
+      if(idx === currentIdx) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+  }
+
+  function loadPage() {
+    const data = activeData[currentIdx];
+
+    document.getElementById('progressBar').style.width = `${((currentIdx + 1) / activeData.length) * 100}%`;
+    document.getElementById('progressText').textContent = `問 ${currentIdx + 1} / ${activeData.length}`;
+
+    // STEP表示初期化
+    document.getElementById('step1-card').style.display = "block";
+    document.getElementById('step2-card').style.display = "none";
+    
+    const step3Card = document.getElementById('step3-card');
+    step3Card.style.display = "none";
+    step3Card.innerHTML = `
+      <div class="step-header">
+        <span class="step-badge">STEP 3</span>
+        <span>完成文を作ろう！（並べ替え）</span>
+      </div>
+      <div class="question-instruction" id="s3-inst">${data.step3.inst}</div>
+      <div class="answer-area" id="answerArea"><span style="color:#aaa;">下のパーツをタップして並べ替えてね</span></div>
+      <div id="wordBank" style="text-align: center;"></div>
+      <button class="action-btn" id="s3-check-btn" style="display:none;" onclick="checkStep3()">答えをチェック</button>
+    `;
+
+    document.getElementById('feedback-area').innerHTML = "";
+    document.getElementById('nextBtn').style.display = "none";
+
+    // STEP 1 セット
+    document.getElementById('s1-inst').textContent = data.step1.inst;
+    renderSelectArea('s1-select-area', data.step1, 's1-select');
+    document.getElementById('s1-check-btn').style.display = "block";
+
+    // STEP 2 セット
+    document.getElementById('s2-inst').textContent = "後ろに続ける動詞の形を選ぼう！";
+    renderSelectArea('s2-select-area', data.step2, 's2-select');
+
+    // STEP 3 セット
+    setupSortArea(data.step3);
+  }
+
+  function renderSelectArea(containerId, stepData, selectId) {
+    const area = document.getElementById(containerId);
+    area.innerHTML = stepData.prefix;
+
+    const select = document.createElement('select');
+    select.id = selectId;
+    select.innerHTML = `<option value="">--選択--</option>` + 
+      shuffle([...stepData.opts]).map(o => `<option value="${o}">${o}</option>`).join('');
+    area.appendChild(select);
+  }
+
+  function checkStep1() {
+    const data = activeData[currentIdx].step1;
+    const val = document.getElementById('s1-select').value;
+
+    if (val === data.ans) {
+      document.getElementById('s1-check-btn').style.display = "none";
+      document.getElementById('step2-card').style.display = "block";
+    } else {
+      alert("意味に合う選択肢をもう一度選んでね！");
+    }
+  }
+
+  function checkStep2() {
+    const data = activeData[currentIdx].step2;
+    const val = document.getElementById('s2-select').value;
+
+    if (val === data.ans) {
+      document.getElementById('step1-card').style.display = "none";
+      document.getElementById('step2-card').style.display = "none";
+      document.getElementById('step3-card').style.display = "block";
+    } else {
+      alert("【ルール再確認！】\n前置詞（to, for, about, at, of, by, before, afterなど）の後ろは「必ず動名詞 (-ing)」だよ！選び直してみよう！");
+    }
+  }
+
+  function setupSortArea(step3Data) {
+    const area = document.getElementById('answerArea');
+    const bank = document.getElementById('wordBank');
+    if (!area || !bank) return;
+
+    userSort = [];
+    bank.innerHTML = "";
+
+    const shuffledWords = shuffle([...step3Data.words]);
+    shuffledWords.forEach(w => {
+      const btn = document.createElement('button');
+      btn.className = 'word-btn';
+      btn.textContent = w;
+      btn.onclick = () => {
+        if (btn.classList.contains('used')) return;
+        if (userSort.length === 0) area.innerHTML = "";
+        userSort.push({ text: w, btn: btn });
+        btn.classList.add('used');
+        renderSort();
+      };
+      bank.appendChild(btn);
+    });
+  }
+
+  function renderSort() {
+    const area = document.getElementById('answerArea');
+    area.innerHTML = "";
+    userSort.forEach((item, idx) => {
+      const b = document.createElement('button');
+      b.className = 'word-btn';
+      b.style.margin = "2px";
+      b.textContent = item.text;
+      b.onclick = () => {
+        item.btn.classList.remove('used');
+        userSort.splice(idx, 1);
+        renderSort();
+        if(userSort.length === 0) area.innerHTML = '<span style="color:#aaa;">下のパーツをタップして並べ替えてね</span>';
+      };
+      area.appendChild(b);
+    });
+
+    const checkBtn = document.getElementById('s3-check-btn');
+    if (userSort.length === activeData[currentIdx].step3.words.length) {
+      if (checkBtn) checkBtn.style.display = "block";
+    } else {
+      if (checkBtn) checkBtn.style.display = "none";
+    }
+  }
+
+  function checkStep3() {
+    const data = activeData[currentIdx].step3;
+    let userStr = userSort.map(i => i.text).join(" ");
+    let cleanUser = userStr.replace(/[.,!?]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+    let cleanAns = data.correct.replace(/[.,!?]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+
+    if (cleanUser === cleanAns) {
+      document.getElementById('step3-card').innerHTML = `
+        <div class="celebration-text">
+          ✨ 大正解！ PERFECT! ✨<br>
+          <span style="font-size:1.3rem; color:#333;">${data.correct}</span>
+        </div>
+      `;
+      document.getElementById('nextBtn').style.display = "block";
+    } else {
+      alert("語順を確認してね！前置詞の後ろが動名詞になっているかチェック！");
+    }
+  }
+
+  function nextQuestion() {
+    if (currentIdx < activeData.length - 1) {
+      currentIdx++;
+      renderTabs();
+      loadPage();
+    } else {
+      document.getElementById('game-content').innerHTML = `
+        <div class='celebration-text'>
+          🎉 全10問コンプリート！素晴らしい！ 🎉<br>
+          <span style="font-size:1.2rem; color:#2c3e50;">「前置詞 + 動名詞」の重要ルールを完ぺきにマスターしましたね！</span>
+        </div>
+      `;
+      document.getElementById('progressBar').style.width = "100%";
+      document.getElementById('progressText').textContent = "10 / 10 完成！";
+    }
+  }
+
+  function generatePrintSheet() {
+    const p1Div = document.getElementById('ws-part1');
+    const p2Div = document.getElementById('ws-part2');
+    const ansDiv = document.getElementById('sheet-answers');
+
+    p1Div.innerHTML = "";
+    p2Div.innerHTML = "";
+    ansDiv.innerHTML = "";
+
+    const part1Shuffled = shuffle([...rawData]);
+    const part2Shuffled = shuffle([...rawData]);
+
+    part1Shuffled.forEach((item, idx) => {
+      const q1 = document.createElement('div');
+      q1.className = 'sheet-question';
+      q1.innerHTML = `
+        <div class="q-text">${idx + 1}. 「${item.phraseJa}」</div>
+        <div class="q-line"></div>
+      `;
+      p1Div.appendChild(q1);
+    });
+
+    part2Shuffled.forEach((item, idx) => {
+      const q2 = document.createElement('div');
+      q2.className = 'sheet-question';
+      let scrambleText = "( " + shuffle([...item.step3.words]).join(" / ") + " )";
+      q2.innerHTML = `
+        <div class="scramble-header">${idx + 1}. <span class="scramble-words-inline">${scrambleText}</span></div>
+        <div class="q-line"></div>
+        <div class="ja-subtext">（ ${item.step3.inst} ）</div>
+      `;
+      p2Div.appendChild(q2);
+    });
+
+    ansDiv.innerHTML = `
+      <div style="grid-column: 1 / -1; font-weight:bold; margin-bottom:2px; border-bottom:1px solid #666;">【PART 1 解答】</div>
+      ${part1Shuffled.map((item, idx) => `<div><b>Q${idx + 1}.</b> <b>${item.phraseEn}</b></div>`).join('')}
+      <div style="grid-column: 1 / -1; font-weight:bold; margin-top:6px; margin-bottom:2px; border-bottom:1px solid #666;">【PART 2 解答】</div>
+      ${part2Shuffled.map((item, idx) => `<div><b>Q${idx + 1}.</b> <i>${item.step3.correct}</i></div>`).join('')}
+    `;
+  }
+
+  window.onload = function() {
+    activeData = shuffle([...rawData]);
+    initTabs();
+    loadPage();
+    generatePrintSheet();
+  };
+</script>
+</body>
+</html>
