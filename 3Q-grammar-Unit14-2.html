@@ -385,7 +385,7 @@
   <div class="progress-container">
     <div class="progress-bar" id="progressBar"></div>
   </div>
-  <div class="progress-text" id="progressText">問 1 / 8</div>
+  <div class="progress-text" id="progressText">問 1 / 10</div>
 
   <div id="game-content">
     <!-- STEP 1 -->
@@ -463,7 +463,7 @@
     return arr;
   }
 
-  // 全8問のデータ構造
+  // 全10問のデータ構造
   const pageData = [
     {
       pageNum: 1,
@@ -623,6 +623,46 @@
         inst: "私は見ていてワクワクするものを探しています。",
         words: ["I", "am", "looking", "for", "something", "exciting", "to", "watch."],
         correct: "I am looking for something exciting to watch."
+      }
+    },
+    {
+      pageNum: 9,
+      step1: {
+        inst: "「時間がない」というフレーズを作りましょう。",
+        opts: ["time", "money", "books", "food"],
+        ans: "time",
+        prefix: "don't have ", suffix: ""
+      },
+      step2: {
+        inst: "「シャワーを浴びる時間」というフレーズを作りましょう。",
+        opts: ["take", "make", "wash", "have"],
+        ans: "take",
+        prefix: "time to ", suffix: " a shower"
+      },
+      step3: {
+        inst: "私にはシャワーを浴びる時間がありません。",
+        words: ["I", "don't", "have", "time", "to", "take", "a", "shower."],
+        correct: "I don't have time to take a shower."
+      }
+    },
+    {
+      pageNum: 10,
+      step1: {
+        inst: "「時間がない」というフレーズを作りましょう。",
+        opts: ["time", "money", "friends", "work"],
+        ans: "time",
+        prefix: "don't have ", suffix: ""
+      },
+      step2: {
+        inst: "「今日夕食を作る時間」というフレーズを作りましょう。",
+        opts: ["cook", "eat", "buy", "enjoy"],
+        ans: "cook",
+        prefix: "time to ", suffix: " dinner today"
+      },
+      step3: {
+        inst: "私には今日、夕食を作る時間がありません。",
+        words: ["I", "don't", "have", "time", "to", "cook", "dinner", "today."],
+        correct: "I don't have time to cook dinner today."
       }
     }
   ];
@@ -809,12 +849,12 @@
     } else {
       document.getElementById('game-content').innerHTML = `
         <div class='celebration-text'>
-          🎉 全8問クリア！素晴らしい！ 🎉<br>
+          🎉 全10問クリア！素晴らしい！ 🎉<br>
           <span style="font-size:1.2rem; color:#2c3e50;">「〜するための…」の不定詞（形容詞的用法）マスター達成です！</span>
         </div>
       `;
       document.getElementById('progressBar').style.width = "100%";
-      document.getElementById('progressText').textContent = "8 / 8 完成！";
+      document.getElementById('progressText').textContent = "10 / 10 完成！";
     }
   }
 
@@ -828,7 +868,7 @@
     p2Div.innerHTML = "";
     ansDiv.innerHTML = "";
 
-    const wordList = shuffle(["cold", "drink", "homework", "do", "fun", "read", "things", "see", "nice", "wear", "warm", "eat", "books", "exciting", "watch"]);
+    const wordList = shuffle(["cold", "drink", "homework", "do", "fun", "read", "things", "see", "nice", "wear", "warm", "eat", "books", "exciting", "watch", "time", "take", "cook"]);
 
     wordListDiv.innerHTML = `
       <span>[単語リスト] ${wordList.join(" / ")}</span>
@@ -842,7 +882,9 @@
       { ja: "5. 着るための素敵なもの", en: "something nice to wear" },
       { ja: "6. 食べるための温かいもの", en: "something warm to eat" },
       { ja: "7. 読むべきたくさんの本", en: "a lot of books to read" },
-      { ja: "8. 見ていてワクワクするもの", en: "something exciting to watch" }
+      { ja: "8. 見ていてワクワクするもの", en: "something exciting to watch" },
+      { ja: "9. シャワーを浴びる時間", en: "time to take a shower" },
+      { ja: "10. 今日夕食を作る時間", en: "time to cook dinner today" }
     ];
 
     phraseList.forEach(item => {
@@ -895,6 +937,16 @@
         ja: "8. 私は見ていてワクワクするものを探しています。", 
         scramble: "( watch / for / looking / exciting / to / I / am / something ).", 
         ans: "I am looking for something exciting to watch." 
+      },
+      { 
+        ja: "9. 私にはシャワーを浴びる時間がありません。", 
+        scramble: "( take / time / I / a / to / don't / shower / have ).", 
+        ans: "I don't have time to take a shower." 
+      },
+      { 
+        ja: "10. 私には今日、夕食を作る時間がありません。", 
+        scramble: "( cook / I / to / today / don't / time / dinner / have ).", 
+        ans: "I don't have time to cook dinner today." 
       }
     ];
 
