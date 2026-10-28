@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英検3級 文法 13章 比較 Part 3</title>
-    <script src="auth.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
@@ -125,6 +124,22 @@
         }
         #excellentPopup.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+        /* Printable Worksheet View (Hidden on screen, shown when printing via Cmd+P) */
+        #print-worksheet { display: none; }
+
+        @media print {
+            body { background: white !important; color: black !important; padding: 10mm; display: block; }
+            header, .score-counter, .progress-bar, #quiz-container, #card-result, #excellentPopup { display: none !important; }
+            #print-worksheet { display: block !important; }
+            
+            .print-title { font-size: 18pt; font-weight: bold; text-align: center; margin-bottom: 20px; color: black; }
+            .print-situation-box { margin-bottom: 25px; page-break-inside: avoid; padding: 5px 0; }
+            .print-sit-title { font-size: 13pt; font-weight: bold; margin-bottom: 8px; color: black; border-bottom: 1px solid #333; padding-bottom: 2px; }
+            .print-sit-text { font-size: 11pt; line-height: 1.5; margin-bottom: 12px; color: black; }
+            .print-q-item { font-size: 11pt; margin-bottom: 12px; line-height: 1.4; color: black; padding-left: 10px; }
+            .print-blank { display: inline-block; width: 120px; border-bottom: 1px solid black; margin: 0 5px; }
+        }
+
         @media (max-width: 600px) {
             .input-area { flex-direction: column; }
             .answer-input { width: 100%; }
@@ -162,6 +177,39 @@
     </div>
 </div>
 
+<!-- Print Worksheet Layout for Command+P / Ctrl+P -->
+<div id="print-worksheet">
+    <div class="print-title">英検3級 文法 13章 比較 Part 3 - ワークシート</div>
+    <div style="margin-bottom: 20px; font-size: 11pt;">氏名: ___________________________ &nbsp;&nbsp;&nbsp;&nbsp; 得点: ( &nbsp;&nbsp;&nbsp;&nbsp; / 12 )</div>
+    
+    <div class="print-situation-box">
+        <div class="print-sit-title">Situation 1</div>
+        <div class="print-sit-text">Two years ago, Mika was taller than Ken, but not as tall as Taro. Now, Ken is the tallest of the three. Mika is shorter than Ken, but not as short as Taro.</div>
+        <div class="print-q-item">1. Two years ago, who was the tallest of the three?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>) was.</div>
+        <div class="print-q-item">2. Two years ago, Mika was (<span class="print-blank"></span>) than Ken.</div>
+        <div class="print-q-item">3. Now, who is the shortest of the three?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>) is.</div>
+        <div class="print-q-item">4. Now, Mika is shorter than (<span class="print-blank"></span>).</div>
+    </div>
+
+    <div class="print-situation-box">
+        <div class="print-sit-title">Situation 2</div>
+        <div class="print-sit-text">Emma loves reading. She has many books. She has more books than Yuki, but not as many as Kota. Kota has thirty books! Yuki has fewer books than Emma. Kota has the most books of all.</div>
+        <div class="print-q-item">1. Who has the most books?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>) does.</div>
+        <div class="print-q-item">2. Emma has (<span class="print-blank"></span>) books than Yuki.</div>
+        <div class="print-q-item">3. Does Yuki have more books than Emma?<br>&nbsp;&nbsp;&nbsp;→ No, Yuki has (<span class="print-blank"></span>) books than Emma.</div>
+        <div class="print-q-item">4. Emma doesn't have as (<span class="print-blank"></span>) books as Kota.</div>
+    </div>
+
+    <div class="print-situation-box">
+        <div class="print-sit-title">Situation 3</div>
+        <div class="print-sit-text">Takuya, Ren, and Daiki practice tennis hard. Takuya plays tennis well. Ren plays tennis better than Takuya. Daiki plays tennis the best of the three. Takuya is a good player, but Daiki is the best player in their club.</div>
+        <div class="print-q-item">1. Who plays tennis the best?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>) does.</div>
+        <div class="print-q-item">2. Ren plays tennis (<span class="print-blank"></span>) than Takuya.</div>
+        <div class="print-q-item">3. Takuya plays tennis (<span class="print-blank"></span>), but Ren is better.</div>
+        <div class="print-q-item">4. Daiki is the (<span class="print-blank"></span>) player of the three.</div>
+    </div>
+</div>
+
 <script>
     // 3つのシチュエーション、各4問の合計12問
     const quizData = [
@@ -191,7 +239,7 @@
             ans: ["Ken"]
         },
 
-        // --- Situation 2 (many/fewer/most/many) ---
+        // --- Situation 2 ---
         {
             title: "Situation 2 (1/4)",
             situation: "Emma loves reading. She has many books. She has more books than Yuki, but not as many as Kota. Kota has thirty books! Yuki has fewer books than Emma. Kota has the most books of all.",
@@ -217,7 +265,7 @@
             ans: ["many"]
         },
 
-        // --- Situation 3 (well/better/best) ---
+        // --- Situation 3 ---
         {
             title: "Situation 3 (1/4)",
             situation: "Takuya, Ren, and Daiki practice tennis hard. Takuya plays tennis well. Ren plays tennis better than Takuya. Daiki plays tennis the best of the three. Takuya is a good player, but Daiki is the best player in their club.",

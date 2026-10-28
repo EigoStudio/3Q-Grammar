@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英検3級 文法 13章 比較 Part 4</title>
-    <script src="auth.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
@@ -384,6 +383,22 @@
             transform: translateY(2px);
             box-shadow: none;
         }
+
+        /* Printable Worksheet View (Hidden on screen, shown when printing via Cmd+P / Ctrl+P) */
+        #print-worksheet { display: none; }
+
+        @media print {
+            body { background: white !important; color: black !important; padding: 10mm; display: block; }
+            header, .score-counter, .progress-bar, #quiz-container, #card-result, #excellentPopup, #customAlertModal { display: none !important; }
+            #print-worksheet { display: block !important; }
+            
+            .print-title { font-size: 18pt; font-weight: bold; text-align: center; margin-bottom: 20px; color: black; }
+            .print-situation-box { margin-bottom: 25px; page-break-inside: avoid; padding: 5px 0; }
+            .print-sit-title { font-size: 13pt; font-weight: bold; margin-bottom: 8px; color: black; border-bottom: 1px solid #333; padding-bottom: 2px; }
+            .print-sit-text { font-size: 11pt; line-height: 1.5; margin-bottom: 12px; color: black; }
+            .print-q-item { font-size: 11pt; margin-bottom: 12px; line-height: 1.4; color: black; padding-left: 10px; }
+            .print-blank { display: inline-block; width: 140px; border-bottom: 1px solid black; margin: 0 5px; }
+        }
     </style>
 </head>
 <body>
@@ -426,6 +441,44 @@
             <button class="action-btn report-btn" onclick="sendEmail()">Report to Tamaki-sensei 📨</button>
             <button class="action-btn next-btn" style="display:inline-block; background-color: var(--accent-brown); box-shadow: 0 5px 0 #4e342e; margin-top: 10px;" onclick="location.reload()">Try Again 🔄</button>
         </div>
+    </div>
+</div>
+
+<!-- Print Worksheet Layout for Command+P / Ctrl+P -->
+<div id="print-worksheet">
+    <div class="print-title">英検3級 文法 13章 比較 Part 4 - ワークシート</div>
+    <div style="margin-bottom: 20px; font-size: 11pt;">氏名: ___________________________ &nbsp;&nbsp;&nbsp;&nbsp; 得点: ( &nbsp;&nbsp;&nbsp;&nbsp; / 12 )</div>
+    
+    <div class="print-situation-box">
+        <div class="print-sit-title">Scene 1</div>
+        <div class="print-sit-text">Everyone in Sophia's class reads many books, but Sophia reads more books than any other student. Yes, she reads the most books in her class! Ken says, "No one reads as many books as Sophia!"</div>
+        <div class="print-q-item">1. Who reads the most books in the class?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+        <div class="print-q-item">2. Does Ken read as many books as Sophia?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+        <div class="print-q-item">3. Who reads more books than Sophia?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+    </div>
+
+    <div class="print-situation-box">
+        <div class="print-sit-title">Scene 2</div>
+        <div class="print-sit-text">Tom is a good soccer player. He plays well. But his brother, Jack, plays soccer better than Tom. Jack is a great player! However, Alex is the best player on their team.</div>
+        <div class="print-q-item">1. Is Tom the best soccer player?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+        <div class="print-q-item">2. Who plays soccer the best on the team?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+        <div class="print-q-item">3. Does Jack play soccer better than Alex?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+    </div>
+
+    <div class="print-situation-box">
+        <div class="print-sit-title">Scene 3</div>
+        <div class="print-sit-text">Today, it is hot in Sapporo. It is 30 degrees. Tokyo is much hotter than Sapporo. It is 35 degrees! But Kyoto is the hottest city in Japan today. It is 38 degrees! Osaka is as hot as Kyoto.</div>
+        <div class="print-q-item">1. Is Sapporo as hot as Tokyo?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+        <div class="print-q-item">2. Which is hotter, Tokyo or Kyoto?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+        <div class="print-q-item">3. Is Osaka 38 degrees today?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+    </div>
+
+    <div class="print-situation-box">
+        <div class="print-sit-title">Scene 4</div>
+        <div class="print-sit-text">Ken, Lisa, and Miki are making pancakes. Ken uses much sugar for his pancake. Lisa uses more sugar than Ken. In fact, Miki uses the most sugar of all! Ken says, "I don't use as much sugar as Miki!"</div>
+        <div class="print-q-item">1. Who uses the most sugar of all?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+        <div class="print-q-item">2. Who uses more sugar, Ken or Lisa?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
+        <div class="print-q-item">3. Does Ken use as much sugar as Miki?<br>&nbsp;&nbsp;&nbsp;→ (<span class="print-blank"></span>)</div>
     </div>
 </div>
 
@@ -655,7 +708,7 @@
 
         const rawText = quizData[idx].situation;
         
-        // 【バグ完全修正】読み上げエラー防止のため、クォーテーションマーク（" や '）を安全に一括消去
+        // クォーテーションマーク（" や '）を安全に一括消去
         const speakableText = rawText.replace(/[\"\'\\]/g, "");
 
         const utterance = new SpeechSynthesisUtterance(speakableText);
