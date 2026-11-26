@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検3級 文法 16章 Part1 SVOO</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary-blue: #1e88e5;
+    --accent-orange: #ff9800;
+    --text-dark: #2c3e50;
+    --bg-color: #f0f7ff;
+    --border-color: #bbdefb;
+    --success-green: #43a047;
+  }
+
+  body {
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "HGMaruGothicMPRO", sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+  }
+
+  .container {
+    background: white;
+    max-width: 900px;
+    width: 100%;
+    padding: 28px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.08);
+    margin-top: 15px;
+  }
+
+  h2 {
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+  }
+
+  /* 目標文の和訳表示 */
+  .sentence-target-box {
+    background-color: #e8f5e9;
+    border: 2px solid #a5d6a7;
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1b5e20;
+    margin-bottom: 16px;
+  }
+
+  /* タブUI */
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 5px 10px;
+    border: 2px solid var(--primary-blue);
+    background-color: white;
+    color: var(--text-dark);
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .tab-btn:hover {
+    background-color: #e3f2fd;
+  }
+
+  .tab-btn.active {
+    background-color: var(--primary-blue);
+    color: white;
+  }
+
+  .tab-btn.question-tab {
+    border-color: #d81b60;
+    color: #d81b60;
+  }
+
+  .tab-btn.question-tab.active {
+    background-color: #d81b60;
+    color: white;
+  }
+
+  .progress-container {
+    width: 100%;
+    background-color: #eee;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    height: 8px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background-color: var(--accent-orange);
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  .progress-text {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  /* SVOO スロットエリア（スッキリ版：ラベルのみ） */
+  .slot-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .slot {
+    background-color: #f7faff;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    flex: 1;
+    min-height: 115px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .slot:hover {
+    background-color: #eef6ff;
+  }
+
+  .slot.active {
+    border-color: var(--accent-orange);
+    background-color: #fff8e1;
+    border-style: solid;
+    box-shadow: 0 3px 10px rgba(255, 152, 0, 0.15);
+  }
+
+  .slot-label {
+    font-size: 0.95rem;
+    color: var(--primary-blue);
+    font-weight: bold;
+    margin-bottom: 8px;
+    border-bottom: 1.5px solid var(--border-color);
+    width: 100%;
+    text-align: center;
+    padding-bottom: 4px;
+  }
+
+  .slot.active .slot-label {
+    color: #e65100;
+    border-bottom-color: #ffcc80;
+  }
+
+  .slot-words {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .answer-word {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.1s;
+    word-break: keep-all;
+  }
+
+  .answer-word:hover {
+    background-color: #1565c0;
+  }
+
+  /* ワードバンク（単語ボタン） */
+  .word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 16px;
+    background: #f7faff;
+    border: 2px dashed var(--border-color);
+    border-radius: 15px;
+  }
+
+  .word-btn {
+    background-color: white;
+    color: var(--text-dark);
+    border: 2px solid var(--primary-blue);
+    padding: 9px 18px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: inherit;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .word-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(30, 136, 229, 0.2);
+  }
+
+  .word-btn.used {
+    border-color: #e0e0e0;
+    color: #ccc;
+    background-color: #f5f5f5;
+    pointer-events: none;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .celebration-box {
+    text-align: center;
+    padding: 16px;
+    background-color: #e8f5e9;
+    border: 2px solid #81c784;
+    border-radius: 15px;
+    margin: 12px 0;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .celebration-title {
+    font-size: 1.4rem;
+    color: #2e7d32;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .final-sentence {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: var(--text-dark);
+  }
+
+  @keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .control-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 15px 0 8px 0;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    padding: 12px 34px;
+    font-size: 1.05rem;
+    background-color: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 0 #2e7d32;
+    font-family: inherit;
+    transition: transform 0.1s, background-color 0.2s;
+  }
+
+  .action-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+
+  .speaker-btn {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    box-shadow: 0 4px 0 #1565c0;
+    font-family: inherit;
+  }
+
+  .speaker-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+
+  .print-link-area {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .print-link-btn {
+    font-size: 0.85rem;
+    color: var(--primary-blue);
+    border: 1.5px solid var(--border-color);
+    background: #f7faff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+  }
+
+  .print-link-btn:hover {
+    background: #e3f2fd;
+  }
+
+  #printable-sheet { display: none; }
+
+  @media (max-width: 700px) {
+    .container { padding: 14px; }
+    .slot-container { gap: 4px; }
+    .slot { min-height: 90px; padding: 5px 2px; }
+    .slot-label { font-size: 0.8rem; }
+    .answer-word { font-size: 0.85rem; padding: 4px 7px; }
+    .word-btn { font-size: 0.95rem; padding: 7px 13px; }
+  }
+
+  /* --- 印刷用ワークシートスタイル（モノクロ最適化） --- */
+  @page {
+    margin: 10mm 12mm;
+    size: portrait;
+  }
+
+  @media print {
+    html, body {
+      background-color: white !important;
+      color: black !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+
+    .container, h2, .tab-container {
+      display: none !important;
+    }
+
+    #printable-sheet {
+      display: block !important;
+      position: relative !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-family: "Hiragino Maru Gothic ProN", "Hiragino Maru Gothic Pro", "HGMaruGothicMPRO", sans-serif !important;
+    }
+
+    .sheet-header {
+      text-align: center;
+      border-bottom: 2px solid #000;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+    }
+
+    .sheet-title {
+      font-size: 12.5pt;
+      font-weight: bold;
+      margin: 0 0 2px 0;
+    }
+
+    .section-title {
+      font-size: 9.5pt;
+      font-weight: bold;
+      margin: 9px 0 4px 0;
+      background-color: #f0f0f0 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      padding: 3px 6px;
+      border-left: 4px solid #000;
+    }
+
+    .ws-instruction {
+      font-size: 8pt;
+      margin-bottom: 5px;
+      color: #000;
+    }
+
+    .bank-box {
+      border: 1.5px solid #000;
+      border-radius: 4px;
+      padding: 5px 10px;
+      margin-bottom: 6px;
+      text-align: center;
+      font-size: 9pt;
+      font-weight: bold;
+      letter-spacing: 1.2px;
+    }
+
+    .step1-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px 14px;
+      margin-bottom: 8px;
+    }
+
+    .step1-item {
+      display: flex;
+      align-items: flex-end;
+      font-size: 8.5pt;
+    }
+
+    .step1-label {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .step1-line {
+      flex: 1;
+      border-bottom: 1px dashed #000;
+      height: 16px;
+      margin-left: 5px;
+    }
+
+    .ws-list-1col {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .sheet-question {
+      margin-bottom: 8px;
+      page-break-inside: avoid;
+    }
+
+    .q-badge {
+      display: inline-block;
+      border: 1px solid #000;
+      font-size: 7pt;
+      font-weight: bold;
+      padding: 1px 4px;
+      border-radius: 3px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    .scramble-words-inline {
+      font-size: 8.8pt;
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+
+    .fill-sentence-inline {
+      font-size: 9pt;
+      font-weight: bold;
+      line-height: 1.75;
+      margin-bottom: 1px;
+    }
+
+    .underline-space {
+      display: inline-block;
+      border-bottom: 1.5px solid #000;
+      min-width: 58px;
+      height: 16px;
+      margin: 0 3px;
+      vertical-align: baseline;
+    }
+
+    .q-line {
+      border-bottom: 1px dashed #000;
+      height: 19px;
+      width: 98%;
+      margin: 2px 0 2px 0;
+    }
+
+    .ja-subtext {
+      font-size: 8pt;
+      color: #222;
+      margin-top: 1px;
+    }
+
+    .answer-key-section {
+      page-break-before: always;
+      margin-top: 15px;
+      border-top: 2px dashed #000;
+      padding-top: 10px;
+      font-size: 8.5pt;
+    }
+
+    .key-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px 14px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h2>英検3級 文法 16章 Part1 SVOO</h2>
+
+<div class="container">
+  <!-- 目標文の和訳 -->
+  <div class="sentence-target-box" id="targetJapanese"></div>
+
+  <!-- タブ領域 -->
+  <div class="tab-container" id="tabContainer"></div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-text" id="progressText">問 1 / 10</div>
+
+  <div id="game-content">
+    <!-- 6スロット構造 (ラベルのみスッキリ表示) -->
+    <div class="slot-container">
+      <div id="box-V1" class="slot" onclick="setCurrentSlot('V1')">
+        <div class="slot-label">V1</div>
+        <div class="slot-words" id="slot-V1"></div>
+      </div>
+      <div id="box-S" class="slot" onclick="setCurrentSlot('S')">
+        <div class="slot-label">S</div>
+        <div class="slot-words" id="slot-S"></div>
+      </div>
+      <div id="box-V2" class="slot" onclick="setCurrentSlot('V2')">
+        <div class="slot-label">V2</div>
+        <div class="slot-words" id="slot-V2"></div>
+      </div>
+      <div id="box-IO" class="slot" onclick="setCurrentSlot('IO')">
+        <div class="slot-label">IO</div>
+        <div class="slot-words" id="slot-IO"></div>
+      </div>
+      <div id="box-DO" class="slot" onclick="setCurrentSlot('DO')">
+        <div class="slot-label">DO</div>
+        <div class="slot-words" id="slot-DO"></div>
+      </div>
+      <div id="box-AD" class="slot" onclick="setCurrentSlot('AD')">
+        <div class="slot-label">AD</div>
+        <div class="slot-words" id="slot-AD"></div>
+      </div>
+    </div>
+
+    <div class="word-bank" id="wordBank"></div>
+
+    <div id="feedback-area"></div>
+
+    <div class="control-area">
+      <button class="action-btn" id="checkBtn" onclick="checkAnswer()">答えをチェック</button>
+      <button class="action-btn" id="nextBtn" style="display:none; background-color: var(--accent-orange); box-shadow: 0 4px 0 #b36b00;" onclick="nextQuestion()">次の問題へ ➔</button>
+      <button class="speaker-btn" id="ttsBtnInline" onclick="speakPhrase()">🔊 発音を聞く</button>
+    </div>
+
+    <div class="print-link-area">
+      <button class="print-link-btn" onclick="window.print()">🖨️ ワークシートを印刷する</button>
+    </div>
+  </div>
+</div>
+
+<!-- 印刷用ワークシート（基本チェック2セクション ＋ 実践10問） -->
+<div id="printable-sheet">
+  <div class="sheet-header">
+    <h1 class="sheet-title">英検3級 文法 16章 Part1 SVOO（人に〜を…する）</h1>
+  </div>
+
+  <!-- SECTION 1: 代名詞の目的格チェック -->
+  <div class="section-title">SECTION 1: 基本チェック① 代名詞の目的格（IO：〜に）</div>
+  <div class="ws-instruction">SVOOの「人（〜に）」の場所には目的格を使います。主格に対応する目的格を枠内から選んで書きなさい。</div>
+  <div class="bank-box">[ him / me / us / them / you / her ]</div>
+  <div class="step1-grid">
+    <div class="step1-item"><span class="step1-label">(1) I（私に）➔</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(2) you（あなたに）➔</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(3) he（彼に）➔</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(4) she（彼女に）➔</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(5) we（私たちに）➔</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(6) they（彼らに）➔</span><span class="step1-line"></span></div>
+  </div>
+
+  <!-- SECTION 2: SVOO主要動詞の意味チェック -->
+  <div class="section-title">SECTION 2: 基本チェック② SVOOをつくる主要動詞の意味</div>
+  <div class="ws-instruction">枠内の動詞（原形）を選んで、それぞれの日本語の意味に合う英語を書きなさい。</div>
+  <div class="bank-box">[ give / send / show / tell / lend / pass ]</div>
+  <div class="step1-grid">
+    <div class="step1-item"><span class="step1-label">(1) 〜をあげる・与える</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(2) 〜を送る</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(3) 〜を見せる</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(4) 〜を話す・伝える</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(5) 〜を貸す</span><span class="step1-line"></span></div>
+    <div class="step1-item"><span class="step1-label">(6) 〜を手渡す・とる</span><span class="step1-line"></span></div>
+  </div>
+
+  <!-- SECTION 3: センテンス実践（空欄補充 ＆ 並べ替え 全10問） -->
+  <div class="section-title">SECTION 3: SVOO センテンス実践（空欄補充 ＆ 並べ替え）</div>
+  <div class="ws-instruction">時制（現在進行形・未来形・過去形）や助動詞、疑問文の語順に注意して、空欄補充または並べ替えを完成させなさい。</div>
+  <div class="ws-list-1col" id="ws-sentence-list"></div>
+
+  <!-- 解答キー -->
+  <div class="answer-key-section">
+    <h3 style="margin:0 0 5px 0;">【Answer Key / 解答】</h3>
+    <div id="sheet-answers" class="key-grid"></div>
+  </div>
+</div>
+
+<script>
+  function shuffle(array) {
+    var arr = array.slice();
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+    return arr;
+  }
+
+  // 全10問データ（be going to 2文、少し込み入った表現を含む）
+  var fixedData = [
+    {
+      id: 1,
+      type: "statement",
+      wsMode: "fill",
+      tabLabel: "問1",
+      targetJa: "私は母の誕生日に、母にスカーフをあげるつもりです。",
+      v1: [],
+      s: ["I"],
+      v2: ["am", "going", "to", "give"],
+      io: ["my", "mother"],
+      do: ["a", "scarf"],
+      ad: ["for", "her", "birthday"],
+      isQ: false,
+      fullSentence: "I am going to give my mother a scarf for her birthday.",
+      wsFillDisplay: "I am going to <span class='underline-space'></span> <span class='underline-space'></span> a scarf for her birthday.",
+      wsFillAns: "give / my mother"
+    },
+    {
+      id: 2,
+      type: "statement",
+      wsMode: "sort",
+      tabLabel: "問2",
+      targetJa: "彼は昨日、私たちにその写真を見せてくれました。",
+      v1: [],
+      s: ["He"],
+      v2: ["showed"],
+      io: ["us"],
+      do: ["the", "pictures"],
+      ad: ["yesterday"],
+      isQ: false,
+      fullSentence: "He showed us the pictures yesterday."
+    },
+    {
+      id: 3,
+      type: "statement",
+      wsMode: "fill",
+      tabLabel: "問3",
+      targetJa: "私は明日、彼女に手紙を送るつもりです。",
+      v1: [],
+      s: ["I"],
+      v2: ["am", "going", "to", "send"],
+      io: ["her"],
+      do: ["a", "letter"],
+      ad: ["tomorrow"],
+      isQ: false,
+      fullSentence: "I am going to send her a letter tomorrow.",
+      wsFillDisplay: "I am going to <span class='underline-space'></span> <span class='underline-space'></span> a letter tomorrow.",
+      wsFillAns: "send / her"
+    },
+    {
+      id: 4,
+      type: "statement",
+      wsMode: "sort",
+      tabLabel: "問4",
+      targetJa: "私は彼に駅への道を教えました。",
+      v1: [],
+      s: ["I"],
+      v2: ["told"],
+      io: ["him"],
+      do: ["the", "way", "to", "the", "station"],
+      ad: [],
+      isQ: false,
+      fullSentence: "I told him the way to the station."
+    },
+    {
+      id: 5,
+      type: "statement",
+      wsMode: "fill",
+      tabLabel: "問5",
+      targetJa: "私は彼に傘を貸すことができます。",
+      v1: [],
+      s: ["I"],
+      v2: ["can", "lend"],
+      io: ["him"],
+      do: ["an", "umbrella"],
+      ad: [],
+      isQ: false,
+      fullSentence: "I can lend him an umbrella.",
+      wsFillDisplay: "I <span class='underline-space'></span> <span class='underline-space'></span> <span class='underline-space'></span> an umbrella.",
+      wsFillAns: "can / lend / him"
+    },
+    {
+      id: 6,
+      type: "statement",
+      wsMode: "sort",
+      tabLabel: "問6",
+      targetJa: "リサは今、私に塩を手渡しています。",
+      v1: [],
+      s: ["Lisa"],
+      v2: ["is", "passing"],
+      io: ["me"],
+      do: ["the", "salt"],
+      ad: ["now"],
+      isQ: false,
+      fullSentence: "Lisa is passing me the salt now."
+    },
+    {
+      id: 7,
+      type: "statement",
+      wsMode: "fill",
+      tabLabel: "問7",
+      targetJa: "私たちは来週、佐藤先生に花をあげるでしょう。",
+      v1: [],
+      s: ["We"],
+      v2: ["will", "give"],
+      io: ["Mr.", "Sato"],
+      do: ["flowers"],
+      ad: ["next", "week"],
+      isQ: false,
+      fullSentence: "We will give Mr. Sato flowers next week.",
+      wsFillDisplay: "We <span class='underline-space'></span> <span class='underline-space'></span> Mr. Sato flowers next week.",
+      wsFillAns: "will / give"
+    },
+    {
+      id: 8,
+      type: "question",
+      wsMode: "sort",
+      tabLabel: "問8 (疑問)",
+      targetJa: "今夜、私にメッセージを送ってくれますか？",
+      v1: ["Will"],
+      s: ["you"],
+      v2: ["send"],
+      io: ["me"],
+      do: ["a", "message"],
+      ad: ["tonight"],
+      isQ: true,
+      fullSentence: "Will you send me a message tonight?"
+    },
+    {
+      id: 9,
+      type: "question",
+      wsMode: "fill",
+      tabLabel: "問9 (疑問)",
+      targetJa: "私にあなたの辞書を貸していただけますか？",
+      v1: ["Could"],
+      s: ["you"],
+      v2: ["lend"],
+      io: ["me"],
+      do: ["your", "dictionary"],
+      ad: [],
+      isQ: true,
+      fullSentence: "Could you lend me your dictionary?",
+      wsFillDisplay: "<span class='underline-space'></span> you <span class='underline-space'></span> <span class='underline-space'></span> your dictionary?",
+      wsFillAns: "Could / lend / me"
+    },
+    {
+      id: 10,
+      type: "question",
+      wsMode: "sort",
+      tabLabel: "問10 (疑問)",
+      targetJa: "私に郵便局への道を教えてくれますか？",
+      v1: ["Can"],
+      s: ["you"],
+      v2: ["show"],
+      io: ["me"],
+      do: ["the", "way", "to", "the", "post", "office"],
+      ad: [],
+      isQ: true,
+      fullSentence: "Can you show me the way to the post office?"
+    }
+  ];
+
+  var currentIdx = 0;
+  var activeSlot = 'S';
+  var userAnswers = { V1: [], S: [], V2: [], IO: [], DO: [], AD: [] };
+
+  function initTabs() {
+    var container = document.getElementById('tabContainer');
+    container.innerHTML = "";
+    fixedData.forEach(function(p, idx) {
+      var btn = document.createElement('button');
+      var extraClass = (p.type === "question") ? "question-tab" : "";
+      btn.className = "tab-btn " + extraClass + " " + (idx === currentIdx ? 'active' : '');
+      btn.textContent = p.tabLabel;
+      btn.onclick = function() {
+        currentIdx = idx;
+        renderTabs();
+        loadPage();
+      };
+      container.appendChild(btn);
+    });
+  }
+
+  function renderTabs() {
+    var btns = document.querySelectorAll('.tab-btn');
+    btns.forEach(function(btn, idx) {
+      if (idx === currentIdx) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+  }
+
+  function setCurrentSlot(id) {
+    activeSlot = id;
+    document.querySelectorAll('.slot').forEach(function(s) {
+      s.classList.remove('active');
+    });
+    document.getElementById('box-' + id).classList.add('active');
+  }
+
+  function loadPage() {
+    var data = fixedData[currentIdx];
+    userAnswers = { V1: [], S: [], V2: [], IO: [], DO: [], AD: [] };
+
+    document.getElementById('targetJapanese').textContent = "「" + data.targetJa + "」";
+
+    document.getElementById('progressBar').style.width = (((currentIdx + 1) / fixedData.length) * 100) + "%";
+    document.getElementById('progressText').textContent = "問 " + (currentIdx + 1) + " / " + fixedData.length;
+
+    document.getElementById('feedback-area').innerHTML = "";
+    document.getElementById('checkBtn').style.display = "inline-block";
+    document.getElementById('nextBtn').style.display = "none";
+    document.getElementById('ttsBtnInline').style.display = "none";
+
+    var allWords = shuffle([].concat(data.v1, data.s, data.v2, data.io, data.do, data.ad));
+    var bank = document.getElementById('wordBank');
+    bank.innerHTML = "";
+
+    allWords.forEach(function(word, i) {
+      var btn = document.createElement('button');
+      btn.className = "word-btn";
+      btn.textContent = word;
+      btn.id = "btn-" + i;
+      btn.onclick = function() {
+        if (!btn.classList.contains('used')) {
+          userAnswers[activeSlot].push({ text: word, id: "btn-" + i });
+          btn.classList.add('used');
+          updateSlots();
+        }
+      };
+      bank.appendChild(btn);
+    });
+
+    updateSlots();
+    setCurrentSlot(data.v1.length > 0 ? 'V1' : 'S');
+  }
+
+  function updateSlots() {
+    ['V1', 'S', 'V2', 'IO', 'DO', 'AD'].forEach(function(id) {
+      var el = document.getElementById('slot-' + id);
+      el.innerHTML = "";
+      userAnswers[id].forEach(function(item, idx) {
+        var div = document.createElement('div');
+        div.className = "answer-word";
+        div.textContent = item.text;
+        div.title = "タップして戻す";
+        div.onclick = function(e) {
+          e.stopPropagation();
+          document.getElementById(item.id).classList.remove('used');
+          userAnswers[id].splice(idx, 1);
+          updateSlots();
+        };
+        el.appendChild(div);
+      });
+    });
+  }
+
+  function checkAnswer() {
+    var d = fixedData[currentIdx];
+    var totalExpected = d.v1.length + d.s.length + d.v2.length + d.io.length + d.do.length + d.ad.length;
+    var totalPlaced = userAnswers.V1.length + userAnswers.S.length + userAnswers.V2.length + userAnswers.IO.length + userAnswers.DO.length + userAnswers.AD.length;
+
+    if (totalPlaced < totalExpected) {
+      alert("まだ使っていない単語があるよ！すべての単語を枠に入れてね。");
+      return;
+    }
+
+    var match = function(key) {
+      return userAnswers[key].map(function(o) { return o.text; }).join(" ") === d[key.toLowerCase()].join(" ");
+    };
+
+    if (match('V1') && match('S') && match('V2') && match('IO') && match('DO') && match('AD')) {
+      document.getElementById('feedback-area').innerHTML =
+        '<div class="celebration-box">' +
+          '<div class="celebration-title">✨ 大正解！ PERFECT! ✨</div>' +
+          '<div class="final-sentence">' + d.fullSentence + '</div>' +
+        '</div>';
+      document.getElementById('checkBtn').style.display = "none";
+      document.getElementById('nextBtn').style.display = "inline-block";
+      document.getElementById('ttsBtnInline').style.display = "inline-flex";
+    } else {
+      var hint = "語順や入れる枠（V1 / S / V2 / IO / DO / AD）をもう一度確認しよう！\n";
+      if (d.isQ) {
+        hint += "【疑問文のポイント】V1(助動詞) → S(主語) → V2(動詞) → IO(人) → DO(物) の順になっているかな？";
+      } else {
+        hint += "【SVOOのポイント】S(主語) → V2(動詞) → IO(人：〜に) → DO(物：〜を) → AD(時・目的など) の順になっているかな？";
+      }
+      alert(hint);
+    }
+  }
+
+  function speakPhrase() {
+    var text = fixedData[currentIdx].fullSentence;
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      var uttr = new SpeechSynthesisUtterance(text);
+      uttr.lang = "en-US";
+      uttr.rate = 0.85;
+      window.speechSynthesis.speak(uttr);
+    }
+  }
+
+  function nextQuestion() {
+    if (currentIdx < fixedData.length - 1) {
+      currentIdx++;
+      renderTabs();
+      loadPage();
+    } else {
+      document.getElementById('targetJapanese').style.display = "none";
+      document.getElementById('game-content').innerHTML =
+        '<div class="celebration-box" style="padding: 35px 20px;">' +
+          '<div class="celebration-title" style="font-size: 1.7rem;">🎉 全10問コンプリート！完璧です！ 🎉</div>' +
+          '<div style="font-size: 1.15rem; color: #2c3e50; margin-top: 10px; font-weight: bold;">' +
+            'SVOO（主語 ＋ 動詞 ＋ 人 ＋ 物）の語順と時制・疑問文をマスターしました！' +
+          '</div>' +
+          '<div style="margin-top: 20px;">' +
+            '<button class="print-link-btn" onclick="window.print()">🖨️ ワークシートを印刷する</button>' +
+          '</div>' +
+        '</div>';
+      document.getElementById('progressBar').style.width = "100%";
+      document.getElementById('progressText').textContent = fixedData.length + " / " + fixedData.length + " 完成！";
+    }
+  }
+
+  /* 印刷用ワークシート生成 */
+  function generatePrintSheet() {
+    var sListDiv = document.getElementById('ws-sentence-list');
+    var ansDiv = document.getElementById('sheet-answers');
+
+    sListDiv.innerHTML = "";
+    ansDiv.innerHTML = "";
+
+    fixedData.forEach(function(item, idx) {
+      var q = document.createElement('div');
+      q.className = 'sheet-question';
+
+      if (item.wsMode === "fill") {
+        q.innerHTML =
+          '<div class="fill-sentence-inline">' +
+            '<span class="q-badge">空欄補充</span>問 ' + (idx + 1) + '. ' + item.wsFillDisplay +
+          '</div>' +
+          '<div class="ja-subtext">（ ' + item.targetJa + ' ）</div>';
+      } else {
+        var rawWords = [].concat(item.v1, item.s, item.v2, item.io, item.do, item.ad);
+        var endMark = item.isQ ? "?" : ".";
+        var scrambleWords = "( " + shuffle(rawWords).join(" / ") + " )" + endMark;
+        q.innerHTML =
+          '<div class="scramble-words-inline">' +
+            '<span class="q-badge">並べ替え</span>問 ' + (idx + 1) + '. ' + scrambleWords +
+          '</div>' +
+          '<div class="q-line"></div>' +
+          '<div class="ja-subtext">（ ' + item.targetJa + ' ）</div>';
+      }
+      sListDiv.appendChild(q);
+    });
+
+    ansDiv.innerHTML =
+      '<div style="grid-column: 1 / -1; font-weight:bold; margin-bottom:2px; border-bottom:1px solid #000;">【SECTION 1 解答 (代名詞の目的格)】</div>' +
+      '<div>(1) me (2) you (3) him</div><div>(4) her (5) us (6) them</div>' +
+      '<div style="grid-column: 1 / -1; font-weight:bold; margin-top:6px; margin-bottom:2px; border-bottom:1px solid #000;">【SECTION 2 解答 (SVOO主要動詞)】</div>' +
+      '<div>(1) give (2) send (3) show</div><div>(4) tell (5) lend (6) pass</div>' +
+      '<div style="grid-column: 1 / -1; font-weight:bold; margin-top:6px; margin-bottom:2px; border-bottom:1px solid #000;">【SECTION 3 解答 (センテンス実践 全10問)】</div>' +
+      fixedData.map(function(item, idx) {
+        var ansText = (item.wsMode === "fill")
+          ? '<b>' + item.wsFillAns + '</b> <i>(' + item.fullSentence + ')</i>'
+          : '<i>' + item.fullSentence + '</i>';
+        return '<div><b>問 ' + (idx + 1) + '.</b> ' + ansText + '</div>';
+      }).join('');
+  }
+
+  window.onload = function() {
+    initTabs();
+    loadPage();
+    generatePrintSheet();
+  };
+</script>
+</body>
+</html>
