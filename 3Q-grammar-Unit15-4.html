@@ -700,7 +700,7 @@
     fixedData.forEach((p, idx) => {
       const btn = document.createElement('button');
       btn.className = `tab-btn ${idx === currentIdx ? 'active' : ''}`;
-      btn.textContent = `問 ${idx + 1} (${p.whWord})`;
+      btn.textContent = `問 ${idx + 1}`;
       btn.onclick = () => {
         currentIdx = idx;
         renderTabs();
